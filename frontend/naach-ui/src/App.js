@@ -4,9 +4,9 @@ import Login from './pages/Login';
 import TeamPortal from './pages/TeamPortal';
 import { AuthContext } from './AuthContext';
 import Home from './pages/Home';
-
-
-
+import Board from './pages/Board';
+import Teams from './pages/Teams';
+import History from './pages/History';
 
 function PrivateRoute({ children }) {
   const { token } = useContext(AuthContext);
@@ -17,7 +17,13 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Public login page */}
+        {/* Public pages */}
+        <Route path="/" element={<Home />} />
+        <Route path="/board" element={<Board />} />
+        <Route path="/teams" element={<Teams />} />
+        <Route path="/history" element={<History />} />
+        
+        {/* Login page */}
         <Route path="/login" element={<Login />} />
 
         {/* Protected portal page */}
@@ -30,9 +36,8 @@ export default function App() {
           }
         />
 
-        {/* Redirect anything else to login */}
-        <Route path="*" element={<Navigate to="/login" replace />} />
-        <Route path="/" element={<Home />} />
+        {/* Redirect anything else to home */}
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
   );
