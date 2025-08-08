@@ -1,12 +1,5 @@
 import React from "react";
-import { Link as RouterLink } from "react-router-dom";
-import {
-  Card,
-  CardBody,
-  CardHeader,
-  Avatar,
-  Chip,
-} from "@heroui/react";
+import { Card, CardBody, Avatar, Chip } from "@heroui/react";
 import PageTemplate from "../components/PageTemplate";
 
 // Executive Board members data grouped by role

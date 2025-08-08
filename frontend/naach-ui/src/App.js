@@ -1,16 +1,16 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
-import Teams from "./pages/Teams";
-import Board from "./pages/Board";
-import Board1_0 from "./pages/Board1_0";
-import Board2_0 from "./pages/Board2_0";
-import Judges from "./pages/Judges";
-import History from "./pages/History";
-import EventSchedule from "./pages/EventSchedule";
-import BuyTickets from "./pages/BuyTickets";
-import Philanthropy from "./pages/Philanthropy";
-import Login from "./pages/Login";
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import Board from './pages/Board';
+import Teams from './pages/Teams';
+import Judges from './pages/Judges';
+import EventSchedule from './pages/EventSchedule';
+import BuyTickets from './pages/BuyTickets';
+import Philanthropy from './pages/Philanthropy';
+import History from './pages/History';
+import Login from './pages/Login';
+import Board1_0 from './pages/Board1_0';
+import Board2_0 from './pages/Board2_0';
 
 function App() {
   return (

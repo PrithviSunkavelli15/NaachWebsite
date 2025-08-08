@@ -1,12 +1,7 @@
-import React, { useState } from "react";
-import { Link as RouterLink } from "react-router-dom";
-import {
-  Card,
-  CardBody,
-  CardHeader,
-  Link,
-} from "@heroui/react";
-import PageTemplate from "../components/PageTemplate";
+import React from 'react';
+import { Card, CardBody, CardHeader, Link } from '@heroui/react';
+import { Link as RouterLink } from 'react-router-dom';
+import PageTemplate from '../components/PageTemplate';
 
 // Commented out teams data for now
 /*
