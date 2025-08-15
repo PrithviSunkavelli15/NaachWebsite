@@ -1,34 +1,186 @@
-import React from "react";
-<<<<<<< HEAD
-import { Link as RouterLink } from "react-router-dom";
-import { Button, Card, CardBody, CardHeader } from "@heroui/react";
-=======
+import React, { useState } from "react";
 import { Card, CardBody, CardHeader, Link } from "@heroui/react";
 import { Link as RouterLink } from "react-router-dom";
->>>>>>> 4188bc832fca5ed19e0c77b810d033de36b19c1c
-import PageTemplate from "../components/PageTemplate";
+import {
+  Navbar,
+  NavbarBrand,
+  NavbarContent,
+  NavbarItem,
+  Button,
+} from "@heroui/react";
+
+// Enhanced SVG logo for NJ Naach
+export const AcmeLogo = () => (
+  <svg fill="none" height="36" viewBox="0 0 32 32" width="36">
+    <path
+      clipRule="evenodd"
+      d="M17.6482 10.1305L15.8785 7.02583L7.02979 22.5499H10.5278L17.6482 10.1305ZM19.8798 14.0457L18.11 17.1983L19.394 19.4511H16.8453L15.1056 22.5499H24.7272L19.8798 14.0457Z"
+      fill="currentColor"
+      fillRule="evenodd"
+    />
+  </svg>
+);
 
 export default function History() {
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
+  // Define historyEvents array
+  const historyEvents = [
+    {
+      id: 1,
+      title: "NJ NAACH 3.0",
+      year: "2026",
+      category: "Foundation",
+      description: "Latest iteration of NJ NAACH"
+    },
+    {
+      id: 2,
+      title: "NAACH 3.0 Champions",
+      year: "2026",
+      category: "Competition",
+      description: "Winners of NAACH 3.0"
+    },
+    {
+      id: 3,
+      title: "NJ NAACH 2.0",
+      year: "2025",
+      category: "Foundation",
+      description: "Second iteration of NJ NAACH"
+    },
+    {
+      id: 4,
+      title: "NAACH 2.0 Champions",
+      year: "2025",
+      category: "Competition",
+      description: "Winners of NAACH 2.0"
+    },
+    {
+      id: 5,
+      title: "NJ NAACH 1.0",
+      year: "2024",
+      category: "Foundation",
+      description: "First iteration of NJ NAACH"
+    },
+    {
+      id: 6,
+      title: "NAACH 1.0 Champions",
+      year: "2024",
+      category: "Competition",
+      description: "Winners of NAACH 1.0"
+    }
+  ];
+
+  const filteredEvents = selectedCategory === "All" 
+    ? historyEvents 
+    : historyEvents.filter(event => event.category === selectedCategory);
+
+  const categories = ["All", "Competition", "Technology", "Innovation", "Growth", "Milestone", "Foundation"];
+
   return (
-    <PageTemplate>
-<<<<<<< HEAD
-      {/* Hero Section */}
-      <div className="bg-gradient-to-br from-seafoam-100 via-beach-100 to-sand-100 py-20 px-4 relative overflow-hidden">
-        {/* Floating beach elements */}
-        <div className="absolute top-10 left-10 animate-float">
-          <div className="w-20 h-20 bg-seafoam-200/60 rounded-full backdrop-blur-sm"></div>
-        </div>
-        <div className="absolute top-20 right-20 animate-float" style={{ animationDelay: '2s' }}>
-          <div className="w-16 h-16 bg-beach-200/60 rounded-full backdrop-blur-sm"></div>
-        </div>
-        
-        <div className="max-w-6xl mx-auto text-center relative z-10">
-          <h1 className="text-5xl md:text-7xl font-beach text-seafoam-700 mb-6 animate-fade-in">
-            Our History
-          </h1>
-          <p className="text-xl md:text-2xl text-seafoam-600 font-ocean mb-8 animate-slide-up">
-            A Journey of Dance, Community, and Jersey Shore Spirit
-=======
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-indigo-900">
+      {/* ───────────────────────── Enhanced Navbar ───────────────────────── */}
+      <Navbar 
+        shouldHideOnScroll 
+        isBordered 
+        height="4rem" 
+        position="sticky"
+        className="backdrop-blur-md bg-gray-900 border-b border-gray-700"
+      >
+        <NavbarBrand>
+          <AcmeLogo />
+          <span className="font-bold text-white ml-2">
+            NJ NAACH
+          </span>
+        </NavbarBrand>
+
+        <NavbarContent className="hidden sm:flex gap-6" justify="center">
+          <NavbarItem>
+            <Link 
+              as={RouterLink} 
+              to="/" 
+              className="text-white !text-white hover:text-indigo-300 transition-colors duration-200 font-medium"
+            >
+              Home
+            </Link>
+          </NavbarItem>
+          <NavbarItem>
+            <Link 
+              as={RouterLink} 
+              to="/teams" 
+              className="text-white !text-white hover:text-indigo-300 transition-colors duration-200 font-medium"
+            >
+              Teams
+            </Link>
+          </NavbarItem>
+          <NavbarItem>
+            <Link 
+              as={RouterLink} 
+              to="/philanthropy" 
+              className="text-white !text-white hover:text-indigo-300 transition-colors duration-200 font-medium"
+            >
+              Philanthropy
+            </Link>
+          </NavbarItem>
+          <NavbarItem>
+            <Link 
+              as={RouterLink} 
+              to="/board" 
+              className="text-white !text-white hover:text-indigo-300 transition-colors duration-200 font-medium"
+            >
+              Board
+            </Link>
+          </NavbarItem>
+          <NavbarItem>
+            <Link 
+              as={RouterLink} 
+              to="/judges" 
+              className="text-white !text-white hover:text-indigo-300 transition-colors duration-200 font-medium"
+            >
+              Judges
+            </Link>
+          </NavbarItem>
+          <NavbarItem>
+            <Link 
+              as={RouterLink} 
+              to="/history" 
+              className="text-white !text-white hover:text-indigo-300 transition-colors duration-200 font-medium"
+            >
+              History
+            </Link>
+          </NavbarItem>
+          <NavbarItem>
+            <Link 
+              as={RouterLink} 
+              to="/schedule" 
+              className="text-white !text-white hover:text-indigo-300 transition-colors duration-200 font-medium"
+            >
+              Event Schedule
+            </Link>
+          </NavbarItem>
+        </NavbarContent>
+
+        <NavbarContent justify="end">
+          <NavbarItem>
+            <Button
+              as={RouterLink}
+              to="/tickets"
+              className="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-6 py-2 rounded-full hover:from-green-700 hover:to-emerald-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 mr-2"
+            >
+              Buy Tickets
+            </Button>
+          </NavbarItem>
+          <NavbarItem>
+            <Button
+              as={RouterLink}
+              to="/login"
+              className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-6 py-2 rounded-full hover:from-indigo-700 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
+            >
+              Log In
+            </Button>
+          </NavbarItem>
+        </NavbarContent>
+      </Navbar>
+
       {/* ───────────────────────── Hero Section ───────────────────────── */}
       <section className="py-20 px-4">
         <div className="max-w-6xl mx-auto text-center">
@@ -39,44 +191,13 @@ export default function History() {
           </h1>
           <p className="text-xl md:text-2xl text-gray-700 dark:text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
             Celebrating the legacy and evolution of NJ NAACH through the years
->>>>>>> 4188bc832fca5ed19e0c77b810d033de36b19c1c
           </p>
-          <div className="w-24 h-1 bg-gradient-to-r from-seafoam-400 to-beach-400 mx-auto rounded-full"></div>
         </div>
-      </div>
+      </section>
 
-      {/* Timeline Section */}
-      <div className="py-16 px-4 bg-gradient-to-b from-sand-50 to-beach-50">
+      {/* ───────────────────────── Timeline Section ───────────────────────── */}
+      <section className="py-16 px-4">
         <div className="max-w-6xl mx-auto">
-<<<<<<< HEAD
-          <h2 className="text-4xl md:text-5xl font-beach text-beach-700 text-center mb-12">
-            NJ NAACH Timeline
-          </h2>
-          
-          <div className="relative">
-            {/* Timeline Line */}
-            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-beach-500 via-seafoam-500 to-sand-500"></div>
-            
-            {/* Timeline Items */}
-            <div className="space-y-12">
-              {/* 2021 */}
-              <div className="relative flex items-center">
-                <div className="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-gradient-to-r from-beach-400 to-beach-500 rounded-full border-4 border-white shadow-lg"></div>
-                <Card className="w-5/12 ml-auto bg-white/80 backdrop-blur-sm border border-sand-200 shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 animate-fade-in">
-                  <CardBody className="p-6">
-                    <div className="text-right">
-                      <h3 className="text-2xl font-beach text-beach-700 mb-2">2021</h3>
-                      <h4 className="text-xl font-ocean text-beach-600 mb-3">The Beginning</h4>
-                      <p className="text-beach-600 font-ocean">
-                        NJ NAACH was founded by a group of passionate dancers who wanted to create a platform 
-                        for South Asian dance teams in New Jersey. The first competition featured 8 teams and 
-                        was held at Rutgers University.
-                      </p>
-                      <div className="mt-3 text-sm text-beach-500 font-ocean">
-                        <p>🏆 Winner: Rutgers Bhangra</p>
-                        <p>👥 Teams: 8</p>
-                        <p>📍 Venue: Rutgers University</p>
-=======
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
               Timeline
@@ -130,211 +251,11 @@ export default function History() {
                         <p className="text-gray-600 dark:text-gray-400 text-sm">
                           Join the competition and make history!
                         </p>
->>>>>>> 4188bc832fca5ed19e0c77b810d033de36b19c1c
                       </div>
-                    </div>
-                  </CardBody>
-                </Card>
-              </div>
-<<<<<<< HEAD
-
-              {/* 2022 */}
-              <div className="relative flex items-center">
-                <div className="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-gradient-to-r from-seafoam-400 to-seafoam-500 rounded-full border-4 border-white shadow-lg"></div>
-                <Card className="w-5/12 mr-auto bg-white/80 backdrop-blur-sm border border-sand-200 shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 animate-fade-in" style={{ animationDelay: '0.2s' }}>
-                  <CardBody className="p-6">
-                    <div className="text-left">
-                      <h3 className="text-2xl font-beach text-beach-700 mb-2">2022</h3>
-                      <h4 className="text-xl font-ocean text-beach-600 mb-3">Growing Stronger</h4>
-                      <p className="text-beach-600 font-ocean">
-                        The competition expanded to include 12 teams and introduced new categories. 
-                        We also launched our first philanthropic initiative, raising $10,000 for local arts education.
-                      </p>
-                      <div className="mt-3 text-sm text-beach-500 font-ocean">
-                        <p>🏆 Winner: Princeton Fusion</p>
-                        <p>👥 Teams: 12</p>
-                        <p>💙 Raised: $10,000</p>
-                      </div>
-                    </div>
-                  </CardBody>
-                </Card>
-              </div>
-
-              {/* 2023 */}
-              <div className="relative flex items-center">
-                <div className="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-gradient-to-r from-sand-400 to-sand-500 rounded-full border-4 border-white shadow-lg"></div>
-                <Card className="w-5/12 ml-auto bg-white/80 backdrop-blur-sm border border-sand-200 shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-                  <CardBody className="p-6">
-                    <div className="text-right">
-                      <h3 className="text-2xl font-beach text-beach-700 mb-2">2023</h3>
-                      <h4 className="text-xl font-ocean text-beach-600 mb-3">Moving to the Shore</h4>
-                      <p className="text-beach-600 font-ocean">
-                        NJ NAACH moved to the Jersey Shore, embracing the beach and boardwalk culture. 
-                        The event featured 15 teams and raised $25,000 for ocean conservation efforts.
-                      </p>
-                      <div className="mt-3 text-sm text-beach-500 font-ocean">
-                        <p>🏆 Winner: Stevens Bollywood</p>
-                        <p>👥 Teams: 15</p>
-                        <p>🌊 Impact: Ocean Conservation</p>
-                      </div>
-                    </div>
-                  </CardBody>
-                </Card>
-              </div>
-
-              {/* 2024 */}
-              <div className="relative flex items-center">
-                <div className="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-gradient-to-r from-beach-400 to-beach-500 rounded-full border-4 border-white shadow-lg"></div>
-                <Card className="w-5/12 mr-auto bg-white/80 backdrop-blur-sm border border-sand-200 shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 animate-fade-in" style={{ animationDelay: '0.6s' }}>
-                  <CardBody className="p-6">
-                    <div className="text-left">
-                      <h3 className="text-2xl font-beach text-beach-700 mb-2">2024</h3>
-                      <h4 className="text-xl font-ocean text-beach-600 mb-3">Record Breaking</h4>
-                      <p className="text-beach-600 font-ocean">
-                        Our biggest year yet with 20 teams and over 1,000 attendees. We raised $50,000 
-                        for community health initiatives and introduced the "Shore Spirit" award.
-                      </p>
-                      <div className="mt-3 text-sm text-beach-500 font-ocean">
-                        <p>🏆 Winner: NJIT Rhythm</p>
-                        <p>👥 Teams: 20</p>
-                        <p>🏥 Impact: Community Health</p>
-                      </div>
-                    </div>
-                  </CardBody>
-                </Card>
-              </div>
-
-              {/* 2025 */}
-              <div className="relative flex items-center">
-                <div className="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-gradient-to-r from-seafoam-400 to-seafoam-500 rounded-full border-4 border-white shadow-lg"></div>
-                <Card className="w-5/12 ml-auto bg-white/80 backdrop-blur-sm border border-sand-200 shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 animate-fade-in" style={{ animationDelay: '0.8s' }}>
-                  <CardBody className="p-6">
-                    <div className="text-right">
-                      <h3 className="text-2xl font-beach text-beach-700 mb-2">2025</h3>
-                      <h4 className="text-xl font-ocean text-beach-600 mb-3">Innovation & Growth</h4>
-                      <p className="text-beach-600 font-ocean">
-                        Introduced new dance categories and digital innovations. The event featured 25 teams 
-                        and raised $75,000 for arts education programs across New Jersey.
-                      </p>
-                      <div className="mt-3 text-sm text-beach-500 font-ocean">
-                        <p>🏆 Winner: Montclair Fusion</p>
-                        <p>👥 Teams: 25</p>
-                        <p>🎨 Impact: Arts Education</p>
-                      </div>
-                    </div>
-                  </CardBody>
-                </Card>
-              </div>
-
-              {/* 2026 - Future */}
-              <div className="relative flex items-center">
-                <div className="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-gradient-to-r from-coral-400 to-coral-500 rounded-full border-4 border-white shadow-lg animate-pulse"></div>
-                <Card className="w-5/12 mr-auto bg-white/80 backdrop-blur-sm border border-sand-200 shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 animate-fade-in" style={{ animationDelay: '1s' }}>
-                  <CardBody className="p-6">
-                    <div className="text-left">
-                      <h3 className="text-2xl font-beach text-beach-700 mb-2">2026</h3>
-                      <h4 className="text-xl font-ocean text-beach-600 mb-3">NJ NAACH 3.0</h4>
-                      <p className="text-beach-600 font-ocean">
-                        The most ambitious NJ NAACH yet! Featuring 30+ teams, expanded categories, 
-                        and our biggest philanthropic goals. Join us for an unforgettable weekend of dance and community.
-                      </p>
-                      <div className="mt-3 text-sm text-beach-500 font-ocean">
-                        <p>🎯 Goal: 30+ Teams</p>
-                        <p>💙 Target: $100,000</p>
-                        <p>🌊 Theme: Jersey Shore Vibes</p>
-                      </div>
-                    </div>
-                  </CardBody>
-                </Card>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Milestones Section */}
-      <div className="py-16 px-4 bg-gradient-to-b from-beach-50 to-seafoam-50">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-beach text-beach-700 text-center mb-12">
-            Key Milestones
-          </h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            <Card className="bg-white/80 backdrop-blur-sm border border-sand-200 shadow-xl text-center">
-              <CardBody className="p-8">
-                <div className="text-5xl mb-4">👥</div>
-                <h3 className="text-2xl font-beach text-beach-700 mb-4">Community Growth</h3>
-                <div className="space-y-2 text-beach-600 font-ocean">
-                  <p><strong>2019:</strong> 5 founding teams</p>
-                  <p><strong>2021:</strong> 8 teams</p>
-                  <p><strong>2023:</strong> 15 teams</p>
-                  <p><strong>2025:</strong> 25 teams</p>
-                  <p><strong>2026:</strong> 30+ teams</p>
+                    </CardBody>
+                  </Card>
                 </div>
-              </CardBody>
-            </Card>
-
-            <Card className="bg-white/80 backdrop-blur-sm border border-sand-200 shadow-xl text-center">
-              <CardBody className="p-8">
-                <div className="text-5xl mb-4">💙</div>
-                <h3 className="text-2xl font-beach text-beach-700 mb-4">Philanthropic Impact</h3>
-                <div className="space-y-2 text-beach-600 font-ocean">
-                  <p><strong>2021:</strong> $5,000 raised</p>
-                  <p><strong>2022:</strong> $10,000 raised</p>
-                  <p><strong>2023:</strong> $25,000 raised</p>
-                  <p><strong>2024:</strong> $50,000 raised</p>
-                  <p><strong>2025:</strong> $75,000 raised</p>
-                  <p><strong>2026:</strong> $100,000 goal</p>
-                </div>
-              </CardBody>
-            </Card>
-
-            <Card className="bg-white/80 backdrop-blur-sm border border-sand-200 shadow-xl text-center">
-              <CardBody className="p-8">
-                <div className="text-5xl mb-4">🏆</div>
-                <h3 className="text-2xl font-beach text-beach-700 mb-4">Awards & Recognition</h3>
-                <div className="space-y-2 text-beach-600 font-ocean">
-                  <p><strong>2022:</strong> Best Cultural Event</p>
-                  <p><strong>2023:</strong> Community Impact Award</p>
-                  <p><strong>2024:</strong> Arts Excellence Award</p>
-                  <p><strong>2025:</strong> Innovation in Dance</p>
-                  <p><strong>2026:</strong> Jersey Shore Spirit</p>
-                </div>
-              </CardBody>
-            </Card>
-          </div>
-        </div>
-      </div>
-
-      {/* Call to Action */}
-      <div className="bg-gradient-to-r from-beach-500 to-seafoam-500 py-16 px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-beach text-white mb-6">
-            Be Part of Our History
-          </h2>
-          <p className="text-xl text-beach-100 mb-8 font-ocean">
-            Join us for NJ NAACH 3.0 and help us create another amazing chapter in our story
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Button
-              as={RouterLink}
-              to="/tickets"
-              size="lg"
-              className="bg-white text-beach-700 px-8 py-3 rounded-full font-ocean font-semibold hover:bg-sand-100 transition-all duration-300"
-            >
-              Get Tickets
-            </Button>
-            <Button
-              as={RouterLink}
-              to="/teams"
-              size="lg"
-              className="bg-sand-400 text-sand-900 px-8 py-3 rounded-full font-ocean font-semibold hover:bg-sand-500 transition-all duration-300"
-            >
-              View Teams
-            </Button>
-          </div>
-        </div>
-      </div>
-=======
+              </div>
 
               {/* NAACH 2.0 */}
               <div className="timeline-item relative">
@@ -468,7 +389,27 @@ export default function History() {
           </div>
         </div>
       </section>
->>>>>>> 4188bc832fca5ed19e0c77b810d033de36b19c1c
-    </PageTemplate>
+
+      {/* ───────────────────────── Enhanced Footer ───────────────────────── */}
+      <footer className="bg-gradient-to-r from-gray-900 to-indigo-900 text-white py-12">
+        <div className="max-w-7xl mx-auto px-4 text-center">
+          <div className="flex items-center justify-center mb-4">
+            <AcmeLogo />
+            <span className="font-bold text-xl ml-2">NJ NAACH</span>
+          </div>
+          <p className="text-gray-300 mb-4">
+            Naach by the boardwalk
+          </p>
+          <div className="border-t border-gray-700 pt-6">
+            <p className="text-gray-400 mb-2">
+              © 2026 NJ Naach. All rights reserved.
+            </p>
+            <p className="text-gray-500 text-sm">
+              Developed by Prithvi Sunkavelli, Vinit Shenoy, and Shatkratu Swarnkar
+            </p>
+          </div>
+        </div>
+      </footer>
+    </div>
   );
 } 
