@@ -1,298 +1,245 @@
 import React from "react";
 import { Link as RouterLink } from "react-router-dom";
-import {
-  Navbar,
-  NavbarBrand,
-  NavbarContent,
-  NavbarItem,
-  Link,
-  Button,
-  Card,
-  CardBody,
-  CardHeader,
-  Avatar,
-  Chip,
-} from "@heroui/react";
-
-// ─── Enhanced SVG logo for NJ Naach ─────────────────────────────────────────────
-export const AcmeLogo = () => (
-  <svg fill="none" height="36" viewBox="0 0 32 32" width="36">
-    <path
-      clipRule="evenodd"
-      d="M17.6482 10.1305L15.8785 7.02583L7.02979 22.5499H10.5278L17.6482 10.1305ZM19.8798 14.0457L18.11 17.1983L19.394 19.4511H16.8453L15.1056 22.5499H24.7272L19.8798 14.0457Z"
-      fill="currentColor"
-      fillRule="evenodd"
-    />
-  </svg>
-);
-
-// Sample board members data
-const boardMembers = [
-  {
-    id: 1,
-    name: "Sarah Johnson",
-    position: "President",
-    image: null,
-    email: "sarah.johnson@njnaach.com",
-    phone: "+1 (555) 123-4567",
-    description: "Leading NJ NAACH with over 10 years of dance experience and a passion for competitive excellence.",
-    yearJoined: "2020"
-  },
-  {
-    id: 2,
-    name: "Michael Chen",
-    position: "Vice President",
-    image: null,
-    email: "michael.chen@njnaach.com",
-    phone: "+1 (555) 234-5678",
-    description: "Oversees team operations and coordinates with participating dance teams across the region.",
-    yearJoined: "2021"
-  },
-  {
-    id: 3,
-    name: "Emily Rodriguez",
-    position: "Secretary",
-    image: null,
-    email: "emily.rodriguez@njnaach.com",
-    phone: "+1 (555) 345-6789",
-    description: "Manages communications and maintains official records for all NAACH events and competitions.",
-    yearJoined: "2019"
-  },
-  {
-    id: 4,
-    name: "David Kim",
-    position: "Treasurer",
-    image: null,
-    email: "david.kim@njnaach.com",
-    phone: "+1 (555) 456-7890",
-    description: "Handles financial planning and budget management for competitions and team activities.",
-    yearJoined: "2022"
-  },
-  {
-    id: 5,
-    name: "Lisa Thompson",
-    position: "Events Coordinator",
-    image: null,
-    email: "lisa.thompson@njnaach.com",
-    phone: "+1 (555) 567-8901",
-    description: "Organizes competitions, workshops, and community events throughout the year.",
-    yearJoined: "2021"
-  },
-  {
-    id: 6,
-    name: "James Wilson",
-    position: "Technical Director",
-    image: null,
-    email: "james.wilson@njnaach.com",
-    phone: "+1 (555) 678-9012",
-    description: "Manages technical aspects of competitions including sound, lighting, and stage setup.",
-    yearJoined: "2020"
-  }
-];
+import { Button, Card, CardBody, CardHeader, Avatar, Chip } from "@heroui/react";
+import PageTemplate from "../components/PageTemplate";
 
 export default function Board() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-indigo-900">
-      {/* ───────────────────────── Enhanced Navbar ───────────────────────── */}
-      <Navbar 
-        shouldHideOnScroll 
-        isBordered 
-        height="4rem" 
-        position="sticky"
-        className="backdrop-blur-md bg-white/80 dark:bg-gray-900/80 border-b border-gray-200/50 dark:border-gray-700/50"
-      >
-        <NavbarBrand>
-          <AcmeLogo />
-          <span className="font-bold text-inherit ml-2 bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-            NJ NAACH
-          </span>
-        </NavbarBrand>
-
-        <NavbarContent className="hidden sm:flex gap-6" justify="center">
-          <NavbarItem>
-            <Link 
-              as={RouterLink} 
-              to="/board" 
-              color="foreground"
-              className="hover:text-indigo-600 transition-colors duration-200 font-semibold"
-            >
-              Board
-            </Link>
-          </NavbarItem>
-          <NavbarItem>
-            <Link 
-              as={RouterLink} 
-              to="/teams" 
-              color="foreground"
-              className="hover:text-indigo-600 transition-colors duration-200"
-            >
-              Teams
-            </Link>
-          </NavbarItem>
-          <NavbarItem>
-            <Link 
-              as={RouterLink} 
-              to="/history" 
-              color="foreground"
-              className="hover:text-indigo-600 transition-colors duration-200"
-            >
-              History
-            </Link>
-          </NavbarItem>
-        </NavbarContent>
-
-        <NavbarContent justify="end">
-          <NavbarItem>
-            <Button
-              as={RouterLink}
-              to="/login"
-              className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-6 py-2 rounded-full hover:from-indigo-700 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
-            >
-              Team Login
-            </Button>
-          </NavbarItem>
-        </NavbarContent>
-      </Navbar>
-
-      {/* ───────────────────────── Hero Section ───────────────────────── */}
-      <section className="py-20 px-4">
-        <div className="max-w-6xl mx-auto text-center">
-          <h1 className="text-4xl md:text-6xl font-black text-gray-900 dark:text-white mb-6">
-            <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-              Board of Directors
-            </span>
+    <PageTemplate>
+      {/* Hero Section */}
+      <div className="bg-gradient-to-br from-sand-100 via-beach-100 to-seafoam-100 py-20 px-4 relative overflow-hidden">
+        {/* Floating beach elements */}
+        <div className="absolute top-10 left-10 animate-float">
+          <div className="w-20 h-20 bg-sand-200/60 rounded-full backdrop-blur-sm"></div>
+        </div>
+        <div className="absolute top-20 right-20 animate-float" style={{ animationDelay: '2s' }}>
+          <div className="w-16 h-16 bg-beach-200/60 rounded-full backdrop-blur-sm"></div>
+        </div>
+        
+        <div className="max-w-6xl mx-auto text-center relative z-10">
+          <h1 className="text-5xl md:text-7xl font-beach text-sand-700 mb-6 animate-fade-in">
+            Executive Board
           </h1>
-          <p className="text-xl md:text-2xl text-gray-700 dark:text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
-            Meet the dedicated leaders who guide NJ NAACH and ensure the success of our competitive dance community.
+          <p className="text-xl md:text-2xl text-sand-600 font-ocean mb-8 animate-slide-up">
+            Meet the passionate leaders driving NJ NAACH 3.0 forward
           </p>
+          <div className="w-24 h-1 bg-gradient-to-r from-sand-400 to-beach-400 mx-auto rounded-full"></div>
         </div>
-      </section>
+      </div>
 
-      {/* ───────────────────────── Board Members Grid ───────────────────────── */}
-      <section className="py-16 px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {boardMembers.map((member) => (
-              <Card 
-                key={member.id}
-                className="backdrop-blur-md bg-white/80 dark:bg-gray-800/80 border border-gray-200/50 dark:border-gray-700/50 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
-              >
-                <CardHeader className="text-center pb-4">
-                  <div className="flex justify-center mb-4">
-                    <Avatar 
-                      name={member.name}
-                      className="w-24 h-24 text-2xl font-bold bg-gradient-to-r from-indigo-500 to-purple-500"
-                    />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">
-                      {member.name}
-                    </h3>
-                    <Chip 
-                      color="primary" 
-                      variant="flat" 
-                      className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white"
-                    >
-                      {member.position}
-                    </Chip>
-                  </div>
-                </CardHeader>
-
-                <CardBody className="space-y-4">
-                  <p className="text-gray-700 dark:text-gray-300 text-center leading-relaxed">
-                    {member.description}
-                  </p>
-                  
-                  <div className="space-y-2 text-sm">
-                    <div className="flex items-center justify-center space-x-2">
-                      <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                      </svg>
-                      <span className="text-gray-600 dark:text-gray-400">{member.email}</span>
-                    </div>
-                    <div className="flex items-center justify-center space-x-2">
-                      <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                      </svg>
-                      <span className="text-gray-600 dark:text-gray-400">{member.phone}</span>
-                    </div>
-                    <div className="flex items-center justify-center space-x-2">
-                      <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                      </svg>
-                      <span className="text-gray-600 dark:text-gray-400">Joined {member.yearJoined}</span>
-                    </div>
-                  </div>
-
-                  <div className="pt-4">
-                    <Button
-                      variant="bordered"
-                      className="w-full border-indigo-600 text-indigo-600 hover:bg-indigo-600 hover:text-white transition-all duration-200"
-                      startContent={
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                        </svg>
-                      }
-                    >
-                      Contact {member.name.split(' ')[0]}
-                    </Button>
-                  </div>
-                </CardBody>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ───────────────────────── Call to Action ───────────────────────── */}
-      <section className="py-20 px-4 bg-gradient-to-r from-indigo-600 to-purple-600">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-            Join Our Community
+      {/* Mission & Values */}
+      <div className="py-16 px-4 bg-gradient-to-b from-beach-50 to-sand-50">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-4xl md:text-5xl font-beach text-beach-700 text-center mb-12">
+            Our Mission & Values
           </h2>
-          <p className="text-xl text-indigo-100 mb-8">
-            Ready to be part of the most exciting competitive dance experience? 
-            Connect with our board members or explore our teams.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              as={RouterLink}
-              to="/teams"
-              size="lg"
-              variant="bordered"
-              className="border-white text-white hover:bg-white hover:text-indigo-600"
-            >
-              View Teams
-            </Button>
-            <Button
-              as={RouterLink}
-              to="/login"
-              size="lg"
-              className="bg-white text-indigo-600 hover:bg-gray-100"
-            >
-              Team Login
-            </Button>
-          </div>
-        </div>
-      </section>
+          <div className="grid md:grid-cols-2 gap-8">
+            <Card className="bg-white/80 backdrop-blur-sm border border-sand-200 shadow-xl">
+              <CardBody className="p-8">
+                <div className="text-5xl mb-4">🎯</div>
+                <h3 className="text-2xl font-beach text-beach-700 mb-4">Mission</h3>
+                <p className="text-beach-600 font-ocean leading-relaxed">
+                  To create an inclusive platform that celebrates South Asian dance culture while fostering 
+                  community, promoting artistic excellence, and making a positive impact through philanthropy. 
+                  We strive to bring the vibrant energy of the Jersey Shore to every aspect of our competition.
+                </p>
+              </CardBody>
+            </Card>
 
-      {/* ───────────────────────── Enhanced Footer ───────────────────────── */}
-      <footer className="bg-gradient-to-r from-gray-900 to-indigo-900 text-white py-12">
-        <div className="max-w-7xl mx-auto px-4 text-center">
-          <div className="flex items-center justify-center mb-4">
-            <AcmeLogo />
-            <span className="font-bold text-xl ml-2">NJ NAACH</span>
-          </div>
-          <p className="text-gray-300 mb-4">
-            Empowering dancers through technology and tradition
-          </p>
-          <div className="border-t border-gray-700 pt-6">
-            <p className="text-gray-400">
-              © 2026 NJ Naach. All rights reserved.
-            </p>
+            <Card className="bg-white/80 backdrop-blur-sm border border-sand-200 shadow-xl">
+              <CardBody className="p-8">
+                <div className="text-5xl mb-4">💎</div>
+                <h3 className="text-2xl font-beach text-beach-700 mb-4">Core Values</h3>
+                <div className="space-y-3 text-beach-600 font-ocean">
+                  <p><strong>Excellence:</strong> Striving for the highest quality in everything we do</p>
+                  <p><strong>Community:</strong> Building bridges and fostering connections</p>
+                  <p><strong>Innovation:</strong> Embracing new ideas and creative solutions</p>
+                  <p><strong>Integrity:</strong> Operating with honesty and transparency</p>
+                  <p><strong>Impact:</strong> Making a positive difference in our community</p>
+                </div>
+              </CardBody>
+            </Card>
           </div>
         </div>
-      </footer>
-    </div>
+      </div>
+
+      {/* Board Members Grid */}
+      <div className="py-16 px-4 bg-gradient-to-b from-sand-50 to-beach-50">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-4xl md:text-5xl font-beach text-beach-700 text-center mb-12">
+            Meet Our Leadership Team
+          </h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* President */}
+            <Card className="bg-white/80 backdrop-blur-sm border border-sand-200 shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 animate-fade-in">
+              <CardHeader className="bg-gradient-to-r from-beach-400 to-beach-500 text-white text-center py-6">
+                <Avatar
+                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
+                  className="w-20 h-20 mx-auto mb-4"
+                />
+                <h3 className="text-2xl font-beach">Prithvi Sunkavelli</h3>
+                <Chip color="primary" variant="flat" className="font-ocean">President</Chip>
+              </CardHeader>
+              <CardBody className="p-6">
+                <div className="space-y-3 text-beach-600 font-ocean">
+                  <p><strong>Role:</strong> Overall leadership and strategic direction</p>
+                  <p><strong>Background:</strong> 5+ years in dance leadership</p>
+                  <p><strong>Focus:</strong> Event planning and team coordination</p>
+                  <p><strong>Vision:</strong> Expanding NJ NAACH's reach and impact</p>
+                </div>
+                <div className="mt-4 text-center">
+                  <Chip color="success" variant="flat" className="font-ocean">Strategic Leader</Chip>
+                </div>
+              </CardBody>
+            </Card>
+
+            {/* Vice President */}
+            <Card className="bg-white/80 backdrop-blur-sm border border-sand-200 shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+              <CardHeader className="bg-gradient-to-r from-seafoam-400 to-seafoam-500 text-white text-center py-6">
+                <Avatar
+                  src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face"
+                  className="w-20 h-20 mx-auto mb-4"
+                />
+                <h3 className="text-2xl font-beach">Vinit Shenoy</h3>
+                <Chip color="secondary" variant="flat" className="font-ocean">Vice President</Chip>
+              </CardHeader>
+              <CardBody className="p-6">
+                <div className="space-y-3 text-beach-600 font-ocean">
+                  <p><strong>Role:</strong> Operations and logistics management</p>
+                  <p><strong>Background:</strong> Event management specialist</p>
+                  <p><strong>Focus:</strong> Venue coordination and technical setup</p>
+                  <p><strong>Vision:</strong> Creating seamless event experiences</p>
+                </div>
+                <div className="mt-4 text-center">
+                  <Chip color="warning" variant="flat" className="font-ocean">Operations Expert</Chip>
+                </div>
+              </CardBody>
+            </Card>
+
+            {/* Secretary */}
+            <Card className="bg-white/80 backdrop-blur-sm border border-sand-200 shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 animate-fade-in" style={{ animationDelay: '0.4s' }}>
+              <CardHeader className="bg-gradient-to-r from-coral-400 to-coral-500 text-white text-center py-6">
+                <Avatar
+                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face"
+                  className="w-20 h-20 mx-auto mb-4"
+                />
+                <h3 className="text-2xl font-beach">Shatkratu Swarnkar</h3>
+                <Chip color="success" variant="flat" className="font-ocean">Secretary</Chip>
+              </CardHeader>
+              <CardBody className="p-6">
+                <div className="space-y-3 text-beach-600 font-ocean">
+                  <p><strong>Role:</strong> Communication and documentation</p>
+                  <p><strong>Background:</strong> Communications and marketing</p>
+                  <p><strong>Focus:</strong> Team outreach and social media</p>
+                  <p><strong>Vision:</strong> Building strong community connections</p>
+                </div>
+                <div className="mt-4 text-center">
+                  <Chip color="danger" variant="flat" className="font-ocean">Communication Lead</Chip>
+                </div>
+              </CardBody>
+            </Card>
+
+            {/* Treasurer */}
+            <Card className="bg-white/80 backdrop-blur-sm border border-sand-200 shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 animate-fade-in" style={{ animationDelay: '0.6s' }}>
+              <CardHeader className="bg-gradient-to-r from-sand-400 to-sand-500 text-white text-center py-6">
+                <Avatar
+                  src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face"
+                  className="w-20 h-20 mx-auto mb-4"
+                />
+                <h3 className="text-2xl font-beach">Alex Rodriguez</h3>
+                <Chip color="primary" variant="flat" className="font-ocean">Treasurer</Chip>
+              </CardHeader>
+              <CardBody className="p-6">
+                <div className="space-y-3 text-beach-600 font-ocean">
+                  <p><strong>Role:</strong> Financial management and budgeting</p>
+                  <p><strong>Background:</strong> Finance and accounting</p>
+                  <p><strong>Focus:</strong> Budget planning and financial oversight</p>
+                  <p><strong>Vision:</strong> Ensuring sustainable growth</p>
+                </div>
+                <div className="mt-4 text-center">
+                  <Chip color="secondary" variant="flat" className="font-ocean">Financial Expert</Chip>
+                </div>
+              </CardBody>
+            </Card>
+
+            {/* Marketing Director */}
+            <Card className="bg-white/80 backdrop-blur-sm border border-sand-200 shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 animate-fade-in" style={{ animationDelay: '0.8s' }}>
+              <CardHeader className="bg-gradient-to-r from-beach-400 to-beach-500 text-white text-center py-6">
+                <Avatar
+                  src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face"
+                  className="w-20 h-20 mx-auto mb-4"
+                />
+                <h3 className="text-2xl font-beach">Sarah Johnson</h3>
+                <Chip color="warning" variant="flat" className="font-ocean">Marketing Director</Chip>
+              </CardHeader>
+              <CardBody className="p-6">
+                <div className="space-y-3 text-beach-600 font-ocean">
+                  <p><strong>Role:</strong> Brand promotion and audience engagement</p>
+                  <p><strong>Background:</strong> Digital marketing and design</p>
+                  <p><strong>Focus:</strong> Social media and promotional campaigns</p>
+                  <p><strong>Vision:</strong> Expanding NJ NAACH's reach</p>
+                </div>
+                <div className="mt-4 text-center">
+                  <Chip color="success" variant="flat" className="font-ocean">Creative Director</Chip>
+                </div>
+              </CardBody>
+            </Card>
+
+            {/* Technical Director */}
+            <Card className="bg-white/80 backdrop-blur-sm border border-sand-200 shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 animate-fade-in" style={{ animationDelay: '1s' }}>
+              <CardHeader className="bg-gradient-to-r from-seafoam-400 to-seafoam-500 text-white text-center py-6">
+                <Avatar
+                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
+                  className="w-20 h-20 mx-auto mb-4"
+                />
+                <h3 className="text-2xl font-beach">Mike Chen</h3>
+                <Chip color="danger" variant="flat" className="font-ocean">Technical Director</Chip>
+              </CardHeader>
+              <CardBody className="p-6">
+                <div className="space-y-3 text-beach-600 font-ocean">
+                  <p><strong>Role:</strong> Technical infrastructure and support</p>
+                  <p><strong>Background:</strong> IT and systems management</p>
+                  <p><strong>Focus:</strong> Website and digital platforms</p>
+                  <p><strong>Vision:</strong> Leveraging technology for growth</p>
+                </div>
+                <div className="mt-4 text-center">
+                  <Chip color="primary" variant="flat" className="font-ocean">Tech Innovator</Chip>
+                </div>
+              </CardBody>
+            </Card>
+          </div>
+        </div>
+      </div>
+
+      {/* Call to Action */}
+      <div className="bg-gradient-to-r from-sand-500 to-beach-500 py-16 px-4">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-4xl md:text-5xl font-beach text-white mb-6">
+            Join Our Leadership Team
+          </h2>
+          <p className="text-xl text-sand-100 mb-8 font-ocean">
+            We're always looking for passionate individuals to help us grow and innovate
+          </p>
+          <div className="flex flex-wrap justify-center gap-4">
+            <Button
+              as={RouterLink}
+              to="/contact"
+              size="lg"
+              className="bg-white text-sand-700 px-8 py-3 rounded-full font-ocean font-semibold hover:bg-beach-100 transition-all duration-300"
+            >
+              Contact Us
+            </Button>
+            <Button
+              as={RouterLink}
+              to="/volunteer"
+              size="lg"
+              className="bg-beach-400 text-white px-8 py-3 rounded-full font-ocean font-semibold hover:bg-beach-500 transition-all duration-300"
+            >
+              Volunteer
+            </Button>
+          </div>
+        </div>
+      </div>
+    </PageTemplate>
   );
 } 

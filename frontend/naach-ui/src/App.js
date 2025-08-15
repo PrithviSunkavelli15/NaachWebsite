@@ -7,6 +7,9 @@ import Home from './pages/Home';
 import Board from './pages/Board';
 import Teams from './pages/Teams';
 import History from './pages/History';
+import Philanthropy from './pages/Philanthropy';
+import Judges from './pages/Judges';
+import EventSchedule from './pages/EventSchedule';
 
 function PrivateRoute({ children }) {
   const { token } = useContext(AuthContext);
@@ -22,6 +25,9 @@ export default function App() {
         <Route path="/board" element={<Board />} />
         <Route path="/teams" element={<Teams />} />
         <Route path="/history" element={<History />} />
+        <Route path="/philanthropy" element={<Philanthropy />} />
+        <Route path="/judges" element={<Judges />} />
+        <Route path="/schedule" element={<EventSchedule />} />
         
         {/* Login page */}
         <Route path="/login" element={<Login />} />
