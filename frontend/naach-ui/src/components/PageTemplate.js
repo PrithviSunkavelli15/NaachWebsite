@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import {
   Navbar,
@@ -7,13 +7,12 @@ import {
   NavbarItem,
   Link,
   Button,
+  NavbarMenu,
+  NavbarMenuToggle,
+  NavbarMenuItem,
 } from '@heroui/react';
 
-<<<<<<< HEAD
 // Enhanced SVG logo for NJ Naach with beach theme
-=======
-// Enhanced SVG logo for NJ Naach
->>>>>>> 4188bc832fca5ed19e0c77b810d033de36b19c1c
 export const AcmeLogo = () => (
   <svg fill="none" height="36" viewBox="0 0 32 32" width="36">
     <path
@@ -26,147 +25,65 @@ export const AcmeLogo = () => (
 );
 
 const PageTemplate = ({ children }) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const menuItems = [
+    { name: "Home", path: "/" },
+    { name: "Teams", path: "/teams" },
+    { name: "Philanthropy", path: "/philanthropy" },
+    { name: "Board", path: "/board" },
+    { name: "Judges", path: "/judges" },
+    { name: "History", path: "/history" },
+    { name: "Event Schedule", path: "/schedule" },
+  ];
+
   return (
-<<<<<<< HEAD
     <div className="min-h-screen bg-gradient-to-br from-beach-50 via-sand-50 to-seafoam-100 flex flex-col">
 
-      {/* ───────────────────────── Beach-Themed Navbar ───────────────────────── */}
+      {/* ───────────────────────── Beach-Themed Responsive Navbar ───────────────────────── */}
       <Navbar 
         shouldHideOnScroll 
         isBordered 
-        height="8rem" 
         position="sticky"
-        className="h-20 backdrop-blur-md bg-white/80 border-b border-sand-200 shadow-lg"
+        className="backdrop-blur-md bg-white/80 border-b border-sand-200 shadow-lg min-h-[5rem] sm:min-h-[6rem]"
+        onMenuOpenChange={setIsMenuOpen}
       >
-        <NavbarBrand>
-          <AcmeLogo />
-          <span className="font-beach font-bold text-beach-700 ml-2 text-xl">
-=======
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-indigo-900 flex flex-col">
-      {/* ───────────────────────── Enhanced Navbar ───────────────────────── */}
-      <Navbar 
-        shouldHideOnScroll 
-        isBordered 
-        height="4rem" 
-        position="sticky"
-        className="backdrop-blur-md bg-gray-900 border-b border-gray-700"
-      >
-        <NavbarBrand>
-          <AcmeLogo />
-          <span className="font-bold text-white ml-2">
->>>>>>> 4188bc832fca5ed19e0c77b810d033de36b19c1c
-            NJ NAACH
-          </span>
-        </NavbarBrand>
-
-        <NavbarContent className="hidden sm:flex gap-6" justify="center">
-          <NavbarItem>
-            <Link 
-              as={RouterLink} 
-              to="/" 
-<<<<<<< HEAD
-              className="text-beach-700 hover:text-beach-500 transition-colors duration-200 font-ocean font-medium"
-=======
-              className="text-white !text-white hover:text-indigo-300 transition-colors duration-200 font-medium"
->>>>>>> 4188bc832fca5ed19e0c77b810d033de36b19c1c
-            >
-              Home
-            </Link>
-          </NavbarItem>
-          <NavbarItem>
-            <Link 
-              as={RouterLink} 
-              to="/teams" 
-<<<<<<< HEAD
-              className="text-beach-700 hover:text-beach-500 transition-colors duration-200 font-ocean font-medium"
-=======
-              className="text-white !text-white hover:text-indigo-300 transition-colors duration-200 font-medium"
->>>>>>> 4188bc832fca5ed19e0c77b810d033de36b19c1c
-            >
-              Teams
-            </Link>
-          </NavbarItem>
-          <NavbarItem>
-            <Link 
-              as={RouterLink} 
-              to="/philanthropy" 
-<<<<<<< HEAD
-              className="text-beach-700 hover:text-beach-500 transition-colors duration-200 font-ocean font-medium"
-=======
-              className="text-white !text-white hover:text-indigo-300 transition-colors duration-200 font-medium"
->>>>>>> 4188bc832fca5ed19e0c77b810d033de36b19c1c
-            >
-              Philanthropy
-            </Link>
-          </NavbarItem>
-          <NavbarItem>
-            <Link 
-              as={RouterLink} 
-              to="/board" 
-<<<<<<< HEAD
-              className="text-beach-700 hover:text-beach-500 transition-colors duration-200 font-ocean font-medium"
-=======
-              className="text-white !text-white hover:text-indigo-300 transition-colors duration-200 font-medium"
->>>>>>> 4188bc832fca5ed19e0c77b810d033de36b19c1c
-            >
-              Board
-            </Link>
-          </NavbarItem>
-          <NavbarItem>
-            <Link 
-              as={RouterLink} 
-              to="/judges" 
-<<<<<<< HEAD
-              className="text-beach-700 hover:text-beach-500 transition-colors duration-200 font-ocean font-medium"
-=======
-              className="text-white !text-white hover:text-indigo-300 transition-colors duration-200 font-medium"
->>>>>>> 4188bc832fca5ed19e0c77b810d033de36b19c1c
-            >
-              Judges
-            </Link>
-          </NavbarItem>
-          <NavbarItem>
-            <Link 
-              as={RouterLink} 
-              to="/history" 
-<<<<<<< HEAD
-              className="text-beach-700 hover:text-beach-500 transition-colors duration-200 font-ocean font-medium"
-=======
-              className="text-white !text-white hover:text-indigo-300 transition-colors duration-200 font-medium"
->>>>>>> 4188bc832fca5ed19e0c77b810d033de36b19c1c
-            >
-              History
-            </Link>
-          </NavbarItem>
-          <NavbarItem>
-            <Link 
-              as={RouterLink} 
-              to="/schedule" 
-<<<<<<< HEAD
-              className="text-beach-700 hover:text-beach-500 transition-colors duration-200 font-ocean font-medium"
-=======
-              className="text-white !text-white hover:text-indigo-300 transition-colors duration-200 font-medium"
->>>>>>> 4188bc832fca5ed19e0c77b810d033de36b19c1c
-            >
-              Event Schedule
-            </Link>
-          </NavbarItem>
-<<<<<<< HEAD
-=======
-
->>>>>>> 4188bc832fca5ed19e0c77b810d033de36b19c1c
+        <NavbarContent>
+          <NavbarMenuToggle
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            className="sm:hidden"
+          />
+          <NavbarBrand>
+            <AcmeLogo />
+            <span className="font-beach font-bold text-beach-700 ml-2 text-lg sm:text-xl">
+              NJ NAACH
+            </span>
+          </NavbarBrand>
         </NavbarContent>
 
-        <NavbarContent justify="end">
+        {/* Desktop Navigation */}
+        <NavbarContent className="hidden sm:flex gap-4 lg:gap-6" justify="center">
+          {menuItems.map((item) => (
+            <NavbarItem key={item.name}>
+              <Link 
+                as={RouterLink} 
+                to={item.path} 
+                className="text-beach-700 hover:text-beach-500 transition-colors duration-200 font-ocean font-medium text-sm lg:text-base py-2"
+              >
+                {item.name}
+              </Link>
+            </NavbarItem>
+          ))}
+        </NavbarContent>
+
+        {/* Desktop Buttons */}
+        <NavbarContent justify="end" className="hidden sm:flex">
           <NavbarItem>
             <Button
               as={RouterLink}
               to="/tickets"
-<<<<<<< HEAD
-              className="bg-gradient-to-r from-sand-400 to-sand-500 text-sand-900 px-6 py-2 rounded-full hover:from-sand-500 hover:to-sand-600 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 mr-2 font-ocean font-semibold"
-=======
-              className="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-6 py-2 rounded-full hover:from-green-700 hover:to-emerald-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 mr-2"
->>>>>>> 4188bc832fca5ed19e0c77b810d033de36b19c1c
+              size="sm"
+              className="bg-gradient-to-r from-sand-400 to-sand-500 text-sand-900 px-4 lg:px-6 py-3 rounded-full hover:from-sand-500 hover:to-sand-600 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 mr-2 font-ocean font-semibold text-xs lg:text-sm"
             >
               Buy Tickets
             </Button>
@@ -175,63 +92,72 @@ const PageTemplate = ({ children }) => {
             <Button
               as={RouterLink}
               to="/login"
-<<<<<<< HEAD
-              className="bg-gradient-to-r from-beach-400 to-beach-500 text-white px-6 py-2 rounded-full hover:from-beach-500 hover:to-beach-600 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 font-ocean font-semibold"
-=======
-              className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-6 py-2 rounded-full hover:from-indigo-700 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
->>>>>>> 4188bc832fca5ed19e0c77b810d033de36b19c1c
+              size="sm"
+              className="bg-gradient-to-r from-beach-400 to-beach-500 text-white px-4 lg:px-6 py-3 rounded-full hover:from-beach-500 hover:to-beach-600 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 font-ocean font-semibold text-xs lg:text-sm"
             >
               Log In
             </Button>
           </NavbarItem>
         </NavbarContent>
+
+        {/* Mobile Menu */}
+        <NavbarMenu className="pt-8 bg-white/95 backdrop-blur-md">
+          <div className="flex flex-col gap-4">
+            {menuItems.map((item) => (
+              <NavbarMenuItem key={item.name}>
+                <Link
+                  as={RouterLink}
+                  to={item.path}
+                  className="w-full text-beach-700 hover:text-beach-500 transition-colors duration-200 font-ocean font-medium text-lg py-3 px-4 rounded-lg hover:bg-beach-50"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item.name}
+                </Link>
+              </NavbarMenuItem>
+            ))}
+            
+            {/* Mobile Buttons */}
+            <div className="flex flex-col gap-3 pt-4 border-t border-sand-200">
+              <Button
+                as={RouterLink}
+                to="/tickets"
+                className="w-full bg-gradient-to-r from-sand-400 to-sand-500 text-sand-900 py-3 rounded-lg hover:from-sand-500 hover:to-sand-600 transition-all duration-200 font-ocean font-semibold"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Buy Tickets
+              </Button>
+              <Button
+                as={RouterLink}
+                to="/login"
+                className="w-full bg-gradient-to-r from-beach-400 to-beach-500 text-white py-3 rounded-lg hover:from-beach-500 hover:to-beach-600 transition-all duration-200 font-ocean font-semibold"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Log In
+              </Button>
+            </div>
+          </div>
+        </NavbarMenu>
       </Navbar>
 
-<<<<<<< HEAD
       {/* ───────────────────────── Main Content ───────────────────────── */}
       <main className="flex-1">
         {children}
       </main>
 
       {/* ───────────────────────── Beach-Themed Footer ───────────────────────── */}
-      <footer className="bg-gradient-to-r from-beach-600 to-seafoam-600 text-white py-8 mt-auto">
+      <footer className="bg-gradient-to-r from-beach-600 to-seafoam-600 text-white py-6 sm:py-8 mt-auto">
         <div className="max-w-7xl mx-auto px-4 text-center">
-          <div className="border-t border-beach-400/30 pt-6">
-            <p className="text-beach-100 mb-2 font-ocean">
+          <div className="border-t border-beach-400/30 pt-4 sm:pt-6">
+            <p className="text-beach-100 mb-2 font-ocean text-sm sm:text-base">
               © 2026 NJ Naach. All rights reserved.
             </p>
-            <p className="text-beach-200 text-sm font-ocean">
-=======
-      {/* Main Content */}
-      <main>
-        {children}
-      </main>
-
-      {/* ───────────────────────── Enhanced Footer ───────────────────────── */}
-      <footer className="bg-gradient-to-r from-gray-900 to-indigo-900 text-white py-12">
-        <div className="max-w-7xl mx-auto px-4 text-center">
-          <div className="flex items-center justify-center mb-4">
-            <AcmeLogo />
-            <span className="font-bold text-xl ml-2">NJ NAACH</span>
-          </div>
-          <p className="text-gray-300 mb-4">
-            Naach by the boardwalk
-          </p>
-          <div className="border-t border-gray-700 pt-6">
-            <p className="text-gray-400 mb-2">
-              © 2026 NJ Naach. All rights reserved.
-            </p>
-            <p className="text-gray-500 text-sm">
->>>>>>> 4188bc832fca5ed19e0c77b810d033de36b19c1c
+            <p className="text-beach-200 text-xs sm:text-sm font-ocean">
               Developed by Prithvi Sunkavelli, Vinit Shenoy, and Shatkratu Swarnkar
             </p>
           </div>
         </div>
       </footer>
-<<<<<<< HEAD
 
-=======
->>>>>>> 4188bc832fca5ed19e0c77b810d033de36b19c1c
     </div>
   );
 };

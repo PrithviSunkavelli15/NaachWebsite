@@ -62,6 +62,7 @@ module.exports = {
         'beach': ['"Baloo 2"', 'cursive'],
         'flow': ['"Pacifico"', 'cursive'],
         'ocean': ['"Quicksand"', 'sans-serif'],
+        'carnival': ['"Fredoka One"', 'cursive'],
       },
       animation: {
         'blob': 'blob 7s infinite',
