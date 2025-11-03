@@ -27,11 +27,6 @@ export default function History() {
             Celebrating the legacy and evolution of NJ NAACH through the years
           </p>
           <div className="w-16 sm:w-20 lg:w-24 h-1 bg-gradient-to-r from-seafoam-400 via-coral-400 to-sand-400 mx-auto rounded-full shadow-lg"></div>
-          
-          {/* Enhanced subtitle */}
-          <p className="text-base sm:text-lg text-seafoam-500 font-ocean mt-4 sm:mt-6 animate-slide-up px-4" style={{ animationDelay: '0.3s' }}>
-            From humble beginnings to spectacular performances - every year tells a story of passion, talent, and community
-          </p>
         </div>
       </div>
 
@@ -68,27 +63,27 @@ export default function History() {
             {/* Timeline Items */}
             <div className="space-y-12 sm:space-y-16">
               
-              {/* NAACH 3.0 Champions - Enhanced */}
+              {/* NAACH 3.0 Champions - LEFT SIDE */}
               <div className="timeline-item relative">
                 <div className="timeline-marker absolute left-2 sm:left-4 md:left-1/2 transform md:-translate-x-1/2 w-4 h-4 sm:w-5 sm:h-5 bg-gradient-to-r from-beach-400 to-seafoam-400 rounded-full border-4 border-white shadow-xl ring-4 ring-beach-200"></div>
                 <div className="timeline-content ml-10 sm:ml-20 md:ml-0 md:w-5/12 md:pr-8 lg:pr-12">
-                  <Card className="bg-white/90 backdrop-blur-md border-2 border-sand-200 shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-500 animate-fade-in overflow-hidden">
+                  <Card className="bg-white/90 backdrop-blur-md border-2 border-beach-200 shadow-2xl hover:shadow-3xl transition-all duration-500 animate-fade-in overflow-hidden">
                     <CardHeader className="pb-3 sm:pb-4 bg-gradient-to-r from-beach-50 to-seafoam-50">
                       <h3 className="text-lg sm:text-xl font-beach text-beach-700">🏆 NAACH 3.0 Champions</h3>
-                      <p className="timeline-date text-xs sm:text-sm text-beach-500 font-ocean font-semibold">2026 - You Could Be Here</p>
+                      <p className="timeline-date text-xs sm:text-sm text-beach-500 font-ocean font-semibold">2026 - Coming Soon!</p>
                     </CardHeader>
                     <CardBody className="p-4 sm:p-6">
                       <div className="text-center">
-                        <div className="w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 bg-gradient-to-r from-beach-400 via-seafoam-400 to-coral-400 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
-                          <span className="text-white text-2xl sm:text-3xl font-bold">?</span>
+                        <div className="w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 bg-gradient-to-r from-beach-400 to-seafoam-400 rounded-full flex items-center justify-center mx-auto mb-3 shadow-lg">
+                          <span className="text-white text-2xl sm:text-3xl">?</span>
                         </div>
-                        <p className="text-beach-600 font-ocean text-sm sm:text-base font-medium">
-                          Join the competition and make history!
+                        <p className="text-beach-600 font-ocean text-sm sm:text-base font-medium mb-2">
+                          The competition is heating up!
                         </p>
-                        <div className="mt-3 flex justify-center space-x-2">
-                          <span className="inline-block w-2 h-2 bg-beach-400 rounded-full animate-pulse"></span>
-                          <span className="inline-block w-2 h-2 bg-seafoam-400 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></span>
-                          <span className="inline-block w-2 h-2 bg-coral-400 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></span>
+                        <div className="flex justify-center space-x-1">
+                          <div className="w-2 h-2 bg-beach-400 rounded-full animate-pulse"></div>
+                          <div className="w-2 h-2 bg-seafoam-400 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></div>
+                          <div className="w-2 h-2 bg-coral-400 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></div>
                         </div>
                       </div>
                     </CardBody>
@@ -96,27 +91,27 @@ export default function History() {
                 </div>
               </div>
 
-              {/* NAACH 3.0 Board - Enhanced */}
+              {/* NAACH 3.0 Board - LEFT SIDE */}
               <div className="timeline-item relative">
-                <div className="timeline-marker absolute left-2 sm:left-4 md:left-1/2 transform md:-translate-x-1/2 w-4 h-4 sm:w-5 sm:h-5 bg-gradient-to-r from-beach-400 to-seafoam-400 rounded-full border-4 border-white shadow-xl ring-4 ring-seafoam-200"></div>
+                <div className="timeline-marker absolute left-2 sm:left-4 md:left-1/2 transform md:-translate-x-1/2 w-4 h-4 sm:w-5 sm:h-5 bg-gradient-to-r from-beach-400 to-seafoam-400 rounded-full border-4 border-white shadow-xl ring-4 ring-beach-200"></div>
                 <div className="timeline-content ml-10 sm:ml-20 md:ml-0 md:w-5/12 md:pr-8 lg:pr-12">
                   <Link as={RouterLink} to="/board" className="block">
-                    <Card className="bg-white/90 backdrop-blur-md border-2 border-sand-200 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:scale-105 cursor-pointer overflow-hidden">
-                      <CardHeader className="pb-3 sm:pb-4 bg-gradient-to-r from-seafoam-50 to-beach-50">
-                        <h3 className="text-lg sm:text-xl font-beach text-beach-700">🌟 NJ NAACH 3.0</h3>
-                        <p className="timeline-date text-xs sm:text-sm text-beach-500 font-ocean font-semibold">2026 - The Future is Now</p>
+                    <Card className="bg-white/90 backdrop-blur-md border-2 border-beach-200 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:scale-105 cursor-pointer overflow-hidden">
+                      <CardHeader className="pb-3 sm:pb-4 bg-gradient-to-r from-beach-50 to-seafoam-50">
+                        <h3 className="text-lg sm:text-xl font-beach text-beach-700">👥 NAACH 3.0 Board</h3>
+                        <p className="timeline-date text-xs sm:text-sm text-beach-500 font-ocean font-semibold">2026 - Executive Committee</p>
                       </CardHeader>
                       <CardBody className="p-4 sm:p-6">
                         <div className="text-center">
-                          <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-r from-seafoam-400 to-beach-400 rounded-full flex items-center justify-center mx-auto mb-3 shadow-lg">
+                          <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-r from-beach-400 to-seafoam-400 rounded-full flex items-center justify-center mx-auto mb-3 shadow-lg">
                             <span className="text-white text-lg sm:text-xl">👥</span>
                           </div>
-                          <div className="mt-3 sm:mt-4 text-beach-600 font-ocean font-medium text-sm sm:text-base">
-                            View Executive Board →
-                          </div>
-                          <div className="mt-2 text-xs text-beach-500 font-ocean">
-                            Meet the passionate leaders behind NJ NAACH 3.0
-                          </div>
+                          <p className="text-beach-600 font-ocean text-sm sm:text-base font-medium mb-2">
+                            Meet the dedicated team behind NJ NAACH 3.0
+                          </p>
+                          <p className="text-xs text-beach-500 font-ocean">
+                            From event planning to community outreach, our board members work tirelessly to make this year's competition unforgettable.
+                          </p>
                         </div>
                       </CardBody>
                     </Card>
@@ -124,27 +119,169 @@ export default function History() {
                 </div>
               </div>
 
-              {/* NAACH 2.0 - Enhanced */}
+              {/* NAACH 3.0 Board Photo - RIGHT SIDE */}
+              <div className="timeline-item relative">
+                <div className="timeline-marker absolute left-2 sm:left-4 md:left-1/2 transform md:-translate-x-1/2 w-4 h-4 sm:w-5 sm:h-5 bg-gradient-to-r from-beach-400 to-seafoam-400 rounded-full border-4 border-white shadow-xl ring-4 ring-beach-200"></div>
+                
+                {/* Large Scrapbook Image - RIGHT SIDE */}
+                <div className="absolute right-0 md:right-0 md:left-auto md:w-5/12 md:pl-8 lg:pl-12 top-0">
+                  <div className="relative inline-block transform -translate-y-[36rem] -rotate-3">
+                    {/* Tape pieces - all four corners */}
+                    <div className="absolute -top-3 -left-3 w-12 h-6 bg-yellow-200 opacity-80 transform -rotate-45 z-10 rounded-sm shadow-md"></div>
+                    <div className="absolute -top-3 -right-3 w-12 h-6 bg-yellow-200 opacity-80 transform rotate-45 z-10 rounded-md shadow-md"></div>
+                    <div className="absolute -bottom-3 -left-3 w-12 h-6 bg-yellow-200 opacity-80 transform rotate-45 z-10 rounded-md shadow-md"></div>
+                    <div className="absolute -bottom-3 -right-3 w-12 h-6 bg-yellow-200 opacity-80 transform -rotate-45 z-10 rounded-sm shadow-md"></div>
+                    
+                    {/* Board 3.0 Image */}
+                    <img 
+                      src="/images/board3.0.JPG" 
+                      alt="NAACH 3.0 Board" 
+                      className="w-80 h-80 sm:w-[22rem] sm:h-[22rem] lg:w-[30rem] lg:h-[30rem] object-cover rounded-xl shadow-2xl border-4 border-white"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* NAACH 2.0 Champions - RIGHT SIDE */}
+              <div className="timeline-item relative">
+                <div className="timeline-marker absolute left-2 sm:left-4 md:left-1/2 transform md:-translate-x-1/2 w-4 h-4 sm:w-5 sm:h-5 bg-gradient-to-r from-seafoam-400 to-coral-400 rounded-full border-4 border-white shadow-xl ring-4 ring-seafoam-200"></div>
+                
+                {/* Large Scrapbook Image - LEFT SIDE */}
+                <div className="absolute left-0 md:left-0 md:right-auto md:w-5/12 md:pr-8 lg:pr-12 top-0">
+                  <div className="relative inline-block transform translate-y-40 rotate-6">
+                    {/* Tape pieces - diagonal corners */}
+                    <div className="absolute -top-3 -left-3 w-12 h-6 bg-yellow-200 opacity-80 transform -rotate-12 z-10 rounded-sm shadow-md"></div>
+                    <div className="absolute -top-3 -right-3 w-12 h-6 bg-yellow-200 opacity-80 transform rotate-12 z-10 rounded-md"></div>
+                    <div className="absolute -bottom-3 -left-3 w-12 h-6 bg-yellow-200 opacity-80 transform rotate-12 z-10 rounded-md"></div>
+                    <div className="absolute -bottom-3 -right-3 w-12 h-6 bg-yellow-200 opacity-80 transform -rotate-12 z-10 rounded-sm shadow-md"></div>
+                    
+                    {/* Large Image */}
+                    <img 
+                      src="/images/board2.0.png" 
+                      alt="NAACH 2.0 Board" 
+                      className="w-96 h-96 sm:w-[26rem] sm:h-[26rem] lg:w-[36rem] lg:h-[36rem] object-cover rounded-xl shadow-2xl border-4 border-white"
+                    />
+                  </div>
+                </div>
+                
+                <div className="timeline-content ml-10 sm:ml-20 md:ml-auto md:w-5/12 md:pl-8 lg:pl-12">
+                  <Card className="bg-white/90 backdrop-blur-md border-2 border-seafoam-200 shadow-2xl hover:shadow-3xl transition-all duration-500 animate-fade-in overflow-hidden">
+                    <CardHeader className="pb-3 sm:pb-4 bg-gradient-to-r from-seafoam-50 to-coral-50">
+                      <h3 className="text-lg sm:text-xl font-beach text-beach-700">🏆 NAACH 2.0 PLACINGS</h3>
+                      <p className="timeline-date text-xs sm:text-sm text-beach-500 font-ocean font-semibold"></p>
+                    </CardHeader>
+                    <CardBody className="p-4 sm:p-6">
+                      <div className="text-center">
+                        {/* 6 Bubbles in 2 rows of 3 */}
+                        <div className="space-y-4 mt-4">
+                          {/* First Row - Legends Circuit */}
+                          <div className="text-center">
+                            <h4 className="text-sm sm:text-base font-beach text-seafoam-700 mb-3">Legends</h4>
+                            <div className="flex justify-center space-x-3 sm:space-x-4">
+                              <div className="text-center">
+                                <p className="text-xs sm:text-sm font-beach text-seafoam-700 mb-2 font-semibold">1st Place</p>
+                                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-full flex items-center justify-center mx-auto mb-2 shadow-lg border-2 border-yellow-300 overflow-hidden">
+                                  <img 
+                                    src="/teams/GASZ.jpg" 
+                                    alt="Georgia Saazish" 
+                                    className="w-full h-full object-cover"
+                                  />
+                                </div>
+                                <p className="text-xs text-seafoam-600 font-ocean">Georgia Saazish</p>
+                              </div>
+                              <div className="text-center">
+                                <p className="text-xs sm:text-sm font-beach text-seafoam-700 mb-2 font-semibold">2nd Place</p>
+                                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-gray-400 to-gray-500 rounded-full flex items-center justify-center mx-auto mb-2 shadow-lg border-2 border-gray-300 overflow-hidden">
+                                  <img 
+                                    src="/teams/UNCchalka.jpg" 
+                                    alt="UNC Chalka" 
+                                    className="w-full h-full object-cover"
+                                  />
+                                </div>
+                                <p className="text-xs text-seafoam-600 font-ocean">UNC Chalka</p>
+                              </div>
+                              <div className="text-center">
+                                <p className="text-xs sm:text-sm font-beach text-seafoam-700 mb-2 font-semibold">3rd Place</p>
+                                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-orange-400 to-orange-500 rounded-full flex items-center justify-center mx-auto mb-2 shadow-lg border-2 border-orange-300 overflow-hidden">
+                                  <img 
+                                    src="/teams/UGAAsura.jpg" 
+                                    alt="UGA Asura" 
+                                    className="w-full h-full object-cover"
+                                  />
+                                </div>
+                                <p className="text-xs text-seafoam-600 font-ocean">UGA Asura</p>
+                              </div>
+                            </div>
+                          </div>
+                          
+                          {/* Second Row - RAS Circuit */}
+                          <div className="flex flex-col items-center">
+                            <h4 className="text-sm sm:text-base font-beach text-seafoam-700 mb-3">RAS</h4>
+                            <div className="flex space-x-3 sm:space-x-4" style={{ transform: 'translateX(5%)' }}>
+                              <div className="text-center">
+                                <p className="text-xs sm:text-sm font-beach text-seafoam-700 mb-2 font-semibold">1st Place</p>
+                                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-blue-400 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-2 shadow-lg border-2 border-blue-300 overflow-hidden">
+                                  <img 
+                                    src="/teams/neu.jpg" 
+                                    alt="NEU Nakhraas" 
+                                    className="w-full h-full object-cover"
+                                  />
+                                </div>
+                                <p className="text-xs text-seafoam-600 font-ocean">NEU Nakhraas</p>
+                              </div>
+                              <div className="text-center">
+                                <p className="text-xs sm:text-sm font-beach text-seafoam-700 mb-2 font-semibold">2nd Place</p>
+                                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-purple-400 to-purple-500 rounded-full flex items-center justify-center mx-auto mb-2 shadow-lg border-2 border-purple-300 overflow-hidden">
+                                  <img 
+                                    src="/teams/cornell.jpg" 
+                                    alt="Cornell Big Red Raas" 
+                                    className="w-full h-full object-cover"
+                                  />
+                                </div>
+                                <p className="text-xs text-seafoam-600 font-ocean">Cornell Big Red Raas</p>
+                              </div>
+                              <div className="text-center">
+                                <p className="text-xs sm:text-sm font-beach text-seafoam-700 mb-2 font-semibold">3rd Place</p>
+                                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-pink-400 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-2 shadow-lg border-2 border-pink-300 overflow-hidden">
+                                  <img 
+                                    src="/teams/michigan.jpg" 
+                                    alt="Michigan Wolveraas" 
+                                    className="w-full h-full object-cover"
+                                  />
+                                </div>
+                                <p className="text-xs text-seafoam-600 font-ocean">Michigan Wolveraas</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </CardBody>
+                  </Card>
+                </div>
+              </div>
+
+              {/* NAACH 2.0 Board - RIGHT SIDE */}
               <div className="timeline-item relative">
                 <div className="timeline-marker absolute left-2 sm:left-4 md:left-1/2 transform md:-translate-x-1/2 w-4 h-4 sm:w-5 sm:h-5 bg-gradient-to-r from-seafoam-400 to-coral-400 rounded-full border-4 border-white shadow-xl ring-4 ring-coral-200"></div>
+                
                 <div className="timeline-content ml-10 sm:ml-20 md:ml-auto md:w-5/12 md:pl-8 lg:pl-12">
                   <Link as={RouterLink} to="/board-2-0" className="block">
                     <Card className="bg-white/90 backdrop-blur-md border-2 border-sand-200 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:scale-105 cursor-pointer overflow-hidden">
                       <CardHeader className="pb-3 sm:pb-4 bg-gradient-to-r from-coral-50 to-seafoam-50">
-                        <h3 className="text-lg sm:text-xl font-beach text-beach-700">🎭 NJ NAACH 2.0</h3>
-                        <p className="timeline-date text-xs sm:text-sm text-beach-500 font-ocean font-semibold">2025 - Building on Success</p>
+                        <h3 className="text-lg sm:text-xl font-beach text-beach-700">🎪 NAACH 2.0 Board</h3>
+                        <p className="timeline-date text-xs sm:text-sm text-beach-500 font-ocean font-semibold">2025 - Executive Committee</p>
                       </CardHeader>
                       <CardBody className="p-4 sm:p-6">
                         <div className="text-center">
                           <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-r from-coral-400 to-seafoam-400 rounded-full flex items-center justify-center mx-auto mb-3 shadow-lg">
                             <span className="text-white text-lg sm:text-xl">🎪</span>
                           </div>
-                          <div className="mt-3 sm:mt-4 text-seafoam-600 font-ocean font-medium text-sm sm:text-base">
-                            View Executive Board →
-                          </div>
-                          <div className="mt-2 text-xs text-seafoam-500 font-ocean">
-                            The team that elevated NJ NAACH to new heights
-                          </div>
+                          <p className="text-coral-600 font-ocean text-sm sm:text-base font-medium mb-2">
+                            The team that made NAACH 2.0 possible
+                          </p>
+                          <p className="text-xs text-coral-500 font-ocean">
+                            Dedicated volunteers who brought the vision of NJ NAACH 2.0 to life with passion and creativity.
+                          </p>
                         </div>
                       </CardBody>
                     </Card>
@@ -152,92 +289,108 @@ export default function History() {
                 </div>
               </div>
 
-              {/* NAACH 2.0 Winners - Enhanced */}
+              {/* NAACH 1.0 Champions - LEFT SIDE (BOTTOM) */}
               <div className="timeline-item relative">
-                <div className="timeline-marker absolute left-2 sm:left-4 md:left-1/2 transform md:-translate-x-1/2 w-4 h-4 sm:w-5 sm:h-5 bg-gradient-to-r from-seafoam-400 to-coral-400 rounded-full border-4 border-white shadow-xl ring-4 ring-coral-200"></div>
+                <div className="timeline-marker absolute left-2 sm:left-4 md:left-1/2 transform md:-translate-x-1/2 w-4 h-4 sm:w-5 sm:h-5 bg-gradient-to-r from-sand-400 to-beach-400 rounded-full border-4 border-white shadow-xl ring-4 ring-sand-200"></div>
                 <div className="timeline-content ml-10 sm:ml-20 md:ml-0 md:w-5/12 md:pr-8 lg:pr-12">
-                  <Card className="bg-white/90 backdrop-blur-md border-2 border-sand-200 shadow-2xl hover:shadow-2xl transition-all duration-500 animate-fade-in overflow-hidden">
-                    <CardHeader className="pb-3 sm:pb-4 bg-gradient-to-r from-coral-50 to-seafoam-50">
-                      <h3 className="text-lg sm:text-xl font-beach text-beach-700">🏆 NAACH 2.0 Champions</h3>
-                      <p className="timeline-date text-xs sm:text-sm text-beach-500 font-ocean font-semibold">2025 Winners - Excellence Defined</p>
+                  <Card className="bg-white/90 backdrop-blur-md border-2 border-sand-200 shadow-2xl hover:shadow-3xl transition-all duration-500 animate-fade-in overflow-hidden">
+                    <CardHeader className="pb-3 sm:pb-4 bg-gradient-to-r from-sand-50 to-beach-50">
+                      <h3 className="text-lg sm:text-xl font-beach text-beach-700">🏆 NAACH 1.0 PLACINGS</h3>
+                      <p className="timeline-date text-xs sm:text-sm text-beach-500 font-ocean font-semibold"></p>
                     </CardHeader>
                     <CardBody className="p-4 sm:p-6">
-                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
-                        {[
-                          { place: "1st", color: "from-beach-400 to-seafoam-400", bg: "from-beach-50 to-seafoam-50" },
-                          { place: "2nd", color: "from-seafoam-400 to-sand-400", bg: "from-seafoam-50 to-sand-50" },
-                          { place: "3rd", color: "from-sand-400 to-coral-400", bg: "from-sand-50 to-coral-50" },
-                          { place: "4th", color: "from-coral-400 to-beach-400", bg: "from-coral-50 to-beach-50" },
-                          { place: "5th", color: "from-beach-400 to-seafoam-400", bg: "from-beach-50 to-seafoam-50" },
-                          { place: "6th", color: "from-seafoam-400 to-sand-400", bg: "from-seafoam-50 to-sand-50" }
-                        ].map((item, index) => (
-                          <div key={index} className={`bg-gradient-to-br ${item.bg} rounded-xl p-3 sm:p-4 border border-sand-200 shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105`}>
-                            <div className={`w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-gradient-to-r ${item.color} rounded-full flex items-center justify-center mx-auto mb-2 shadow-lg`}>
-                              <span className="text-white text-xs sm:text-sm font-bold">{item.place}</span>
+                      <div className="text-center">
+                        {/* 3 Bubbles in 1 row for RAS Circuit */}
+                        <div className="space-y-4 mt-4">
+                          <div className="flex flex-col items-center">
+                            <h4 className="text-sm sm:text-base font-beach text-beach-700 mb-3">RAS</h4>
+                            <div className="flex space-x-3 sm:space-x-4" style={{ transform: 'translateX(4%)' }}>
+                              <div className="text-center">
+                                <p className="text-xs sm:text-sm font-beach text-beach-700 mb-2 font-semibold">1st Place</p>
+                                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-full flex items-center justify-center mx-auto mb-2 shadow-lg border-2 border-yellow-300 overflow-hidden">
+                                  <img 
+                                    src="/teams/UIUC.jpg" 
+                                    alt="UIUC" 
+                                    className="w-full h-full object-cover"
+                                  />
+                                </div>
+                                <p className="text-xs text-beach-600 font-ocean">Illini Raas</p>
+                              </div>
+                              <div className="text-center">
+                                <p className="text-xs sm:text-sm font-beach text-beach-700 mb-2 font-semibold">2nd Place</p>
+                                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-gray-400 to-gray-500 rounded-full flex items-center justify-center mx-auto mb-2 shadow-lg border-2 border-gray-300 overflow-hidden">
+                                  <img 
+                                    src="/teams/UMD.jpg" 
+                                    alt="UMD" 
+                                    className="w-full h-full object-cover"
+                                  />
+                                </div>
+                                <p className="text-xs text-beach-600 font-ocean">UMD Entouraas</p>
+                              </div>
+                              <div className="text-center">
+                                <p className="text-xs sm:text-sm font-beach text-beach-700 mb-2 font-semibold">3rd Place</p>
+                                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-orange-400 to-orange-500 rounded-full flex items-center justify-center mx-auto mb-2 shadow-lg border-2 border-orange-300 overflow-hidden">
+                                  <img 
+                                    src="/teams/UCSD.jpg" 
+                                    alt="UCSD" 
+                                    className="w-full h-full object-cover"
+                                  />
+                                </div>
+                                <p className="text-xs text-beach-600 font-ocean">UCSD Raas Ruckus</p>
+                              </div>
                             </div>
-                            <p className="text-xs sm:text-sm text-beach-600 font-ocean text-center font-medium">Team Name</p>
                           </div>
-                        ))}
+                        </div>
                       </div>
                     </CardBody>
                   </Card>
                 </div>
               </div>
 
-              {/* NAACH 1.0 - Enhanced */}
+              {/* NAACH 1.0 Board - LEFT SIDE (BOTTOM) */}
               <div className="timeline-item relative">
                 <div className="timeline-marker absolute left-2 sm:left-4 md:left-1/2 transform md:-translate-x-1/2 w-4 h-4 sm:w-5 sm:h-5 bg-gradient-to-r from-sand-400 to-beach-400 rounded-full border-4 border-white shadow-xl ring-4 ring-beach-200"></div>
+                
+                {/* Large Scrapbook Image - RIGHT SIDE */}
+                <div className="absolute right-0 md:right-0 md:left-auto md:w-5/12 md:pl-8 lg:pl-12 top-0">
+                  <div className="relative inline-block transform -translate-y-80 -rotate-6">
+                    {/* Tape pieces - diagonal corners */}
+                    <div className="absolute -top-3 -left-3 w-12 h-6 bg-yellow-200 opacity-80 transform -rotate-12 z-10 rounded-sm shadow-md"></div>
+                    <div className="absolute -top-3 -right-3 w-12 h-6 bg-yellow-200 opacity-80 transform rotate-12 z-10 rounded-md"></div>
+                    <div className="absolute -bottom-3 -left-3 w-12 h-6 bg-yellow-200 opacity-80 transform rotate-12 z-10 rounded-md"></div>
+                    <div className="absolute -bottom-3 -right-3 w-12 h-6 bg-yellow-200 opacity-80 transform -rotate-12 z-10 rounded-sm shadow-md"></div>
+                    
+                    {/* Large Image */}
+                    <img 
+                      src="/images/board1.0.jpg" 
+                      alt="NAACH 1.0 Board" 
+                      className="w-96 h-96 sm:w-[26rem] sm:h-[26rem] lg:w-[36rem] lg:h-[36rem] object-cover rounded-xl shadow-2xl border-4 border-white"
+                    />
+                  </div>
+                </div>
+                
                 <div className="timeline-content ml-10 sm:ml-20 md:ml-0 md:w-5/12 md:pr-8 lg:pr-12">
                   <Link as={RouterLink} to="/board-1-0" className="block">
                     <Card className="bg-white/90 backdrop-blur-md border-2 border-sand-200 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:scale-105 cursor-pointer overflow-hidden">
                       <CardHeader className="pb-3 sm:pb-4 bg-gradient-to-r from-beach-50 to-sand-50">
-                        <h3 className="text-lg sm:text-xl font-beach text-beach-700">🌅 NJ NAACH 1.0</h3>
-                        <p className="timeline-date text-xs sm:text-sm text-beach-500 font-ocean font-semibold">2024 - Where It All Began</p>
+                        <h3 className="text-lg sm:text-xl font-beach text-beach-700">🌊 NAACH 1.0 Board</h3>
+                        <p className="timeline-date text-xs sm:text-sm text-beach-500 font-ocean font-semibold">2024 - Founding Committee</p>
                       </CardHeader>
                       <CardBody className="p-4 sm:p-6">
                         <div className="text-center">
-                          <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-r from-sand-400 to-beach-400 rounded-full flex items-center justify-center mx-auto mb-3 shadow-lg">
+                          <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-r from-beach-400 to-sand-400 rounded-full flex items-center justify-center mx-auto mb-3 shadow-lg">
                             <span className="text-white text-lg sm:text-xl">🌊</span>
                           </div>
-                          <div className="mt-3 sm:mt-4 text-sand-600 font-ocean font-medium text-sm sm:text-base">
-                            View Executive Board →
-                          </div>
-                          <div className="mt-2 text-xs text-sand-500 font-ocean">
-                            The pioneers who started this incredible journey
-                          </div>
+                          <p className="text-beach-600 font-ocean text-sm sm:text-base font-medium mb-2">
+                            The visionaries who started it all
+                          </p>
+                          <p className="text-xs text-beach-500 font-ocean">
+                            The original team that dreamed big and created the foundation for what NJ NAACH has become today.
+                          </p>
                         </div>
                       </CardBody>
                     </Card>
                   </Link>
-                </div>
-              </div>
-
-              {/* NAACH 1.0 Winners - Enhanced */}
-              <div className="timeline-item relative">
-                <div className="timeline-marker absolute left-2 sm:left-4 md:left-1/2 transform md:-translate-x-1/2 w-4 h-4 sm:w-5 sm:h-5 bg-gradient-to-r from-sand-400 to-beach-400 rounded-full border-4 border-white shadow-xl ring-4 ring-beach-200"></div>
-                <div className="timeline-content ml-10 sm:ml-20 md:ml-0 md:w-5/12 md:pr-8 lg:pr-12">
-                  <Card className="bg-white/90 backdrop-blur-md border-2 border-sand-200 shadow-2xl hover:shadow-2xl transition-all duration-500 animate-fade-in overflow-hidden">
-                    <CardHeader className="pb-3 sm:pb-4 bg-gradient-to-r from-beach-50 to-sand-50">
-                      <h3 className="text-lg sm:text-xl font-beach text-beach-700">🏆 NAACH 1.0 Champions</h3>
-                      <p className="timeline-date text-xs sm:text-sm text-beach-500 font-ocean font-semibold">2024 Winners - The First Champions</p>
-                    </CardHeader>
-                    <CardBody className="p-4 sm:p-6">
-                      <div className="grid grid-cols-3 gap-3 sm:gap-4">
-                        {[
-                          { place: "1st", color: "from-sand-400 to-beach-400", bg: "from-sand-50 to-beach-50" },
-                          { place: "2nd", color: "from-beach-400 to-seafoam-400", bg: "from-beach-50 to-seafoam-50" },
-                          { place: "3rd", color: "from-seafoam-400 to-sand-400", bg: "from-seafoam-50 to-sand-50" }
-                        ].map((item, index) => (
-                          <div key={index} className={`bg-gradient-to-br ${item.bg} rounded-xl p-3 sm:p-4 border border-sand-200 shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105`}>
-                            <div className={`w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-gradient-to-r ${item.color} rounded-full flex items-center justify-center mx-auto mb-2 shadow-lg`}>
-                              <span className="text-white text-xs sm:text-sm font-bold">{item.place}</span>
-                            </div>
-                            <p className="text-xs sm:text-sm text-beach-600 font-ocean text-center font-medium">Team Name</p>
-                          </div>
-                        ))}
-                      </div>
-                    </CardBody>
-                  </Card>
                 </div>
               </div>
 

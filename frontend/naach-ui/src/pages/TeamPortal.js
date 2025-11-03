@@ -1,263 +1,490 @@
-import { useEffect, useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
-import API from '../api';
-import { AuthContext } from '../AuthContext';
-import { 
-  Card, 
-  CardBody, 
-  CardHeader, 
-  Button, 
-  Avatar, 
-  Chip,
-  Divider,
-  Spinner,
+import React, { useState, useEffect } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
+import {
+  Card,
+  CardBody,
+  CardHeader,
+  Button,
+  Avatar,
   Dropdown,
   DropdownTrigger,
   DropdownMenu,
-  DropdownItem
+  DropdownItem,
+  Input,
+  Chip,
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  useDisclosure
 } from '@heroui/react';
+import { 
+  collection, 
+  query, 
+  where, 
+  orderBy, 
+  onSnapshot, 
+  addDoc, 
+  updateDoc, 
+  deleteDoc, 
+  doc,
+  getDocs 
+} from 'firebase/firestore';
+import { db } from '../firebase/config';
+import { useAuth } from '../AuthContext';
+import PageTemplate from '../components/PageTemplate';
+import DocumentSharing from '../components/DocumentSharing';
 
 export default function TeamPortal() {
-  const [team, setTeam] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
-  const { logout } = useContext(AuthContext);
-  const navigate = useNavigate();
+  const { currentUser, logout, userRole, userData } = useAuth();
+  const [documents, setDocuments] = useState([]);
+  const [sharedDocuments, setSharedDocuments] = useState([]);
+  const [filteredDocs, setFilteredDocs] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [newDocument, setNewDocument] = useState({ title: "", content: "", type: "general" });
+  const [editingDoc, setEditingDoc] = useState(null);
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
+  // Categories for documents
+  const categories = [
+    { key: "all", label: "All Documents", color: "default" },
+    { key: "general", label: "General", color: "primary" },
+    { key: "schedule", label: "Schedule", color: "secondary" },
+    { key: "rules", label: "Rules", color: "warning" },
+    { key: "announcement", label: "Announcements", color: "success" },
+    { key: "forms", label: "Forms", color: "danger" }
+  ];
+
+  // Fetch user's own documents from Firestore
   useEffect(() => {
-    API.get('/team/details')
-      .then(res => {
-        setTeam(res.data);
-        setLoading(false);
-      })
-      .catch(err => {
-        setError('Failed to load team details');
-        setLoading(false);
-      });
-  }, []);
+    if (!currentUser) return;
 
-  const handleLogout = () => {
-    logout();
-    navigate('/login');
+    let q;
+    if (userRole === 'admin') {
+      // Admin can see all documents
+      q = query(collection(db, 'documents'), orderBy('createdAt', 'desc'));
+    } else {
+      // Regular users see their own documents
+      q = query(
+        collection(db, 'documents'), 
+        where('userId', '==', currentUser.uid),
+        orderBy('createdAt', 'desc')
+      );
+    }
+
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      const docs = [];
+      querySnapshot.forEach((doc) => {
+        docs.push({ id: doc.id, ...doc.data() });
+      });
+      setDocuments(docs);
+    });
+
+    return () => unsubscribe();
+  }, [currentUser, userRole]);
+
+  // Fetch shared documents from admin
+  useEffect(() => {
+    console.log('=== FETCHING SHARED DOCUMENTS ===');
+    console.log('currentUser:', currentUser);
+    console.log('userData:', userData);
+    console.log('userRole:', userRole);
+    
+    if (!currentUser || !userData) {
+      console.log('⚠️ Missing currentUser or userData, skipping fetch');
+      return;
+    }
+
+    const q = query(collection(db, 'shared_documents'));
+    
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      console.log('📄 Shared documents query returned:', querySnapshot.size, 'documents');
+      const docs = [];
+      
+      querySnapshot.forEach((doc) => {
+        const docData = doc.data();
+        console.log('Processing document:', doc.id, docData);
+        
+        // Check if this user's team has access
+        if (userRole === 'admin') {
+          console.log('✅ Admin - Adding document:', doc.id);
+          docs.push({ id: doc.id, ...docData, isShared: true });
+        } else if (userData.teamName) {
+          console.log('Checking access for team:', userData.teamName);
+          console.log('Document accessibleBy:', docData.accessibleBy);
+          console.log('Document accessibleTeams:', docData.accessibleTeams);
+          
+          const hasAccess = docData.accessibleBy === 'all_teams' || 
+              (Array.isArray(docData.accessibleTeams) && docData.accessibleTeams.includes(userData.teamName)) ||
+              (Array.isArray(docData.accessibleBy) && docData.accessibleBy.includes(userData.teamName));
+          
+          console.log('Has access?', hasAccess);
+          
+          if (hasAccess) {
+            console.log('✅ Team has access - Adding document:', doc.id);
+            docs.push({ id: doc.id, ...docData, isShared: true });
+          } else {
+            console.log('❌ Team does NOT have access to document:', doc.id);
+          }
+        } else {
+          console.log('⚠️ No team name found for user');
+        }
+      });
+      
+      console.log('📊 Total shared documents for this user:', docs.length);
+      console.log('Shared documents:', docs);
+      setSharedDocuments(docs);
+    });
+
+    return () => unsubscribe();
+  }, [currentUser, userData, userRole]);
+
+  // Filter documents based on search and category
+  useEffect(() => {
+    console.log('=== FILTERING DOCUMENTS ===');
+    console.log('Personal documents:', documents.length);
+    console.log('Shared documents:', sharedDocuments.length);
+    
+    // Combine personal documents and shared documents
+    let allDocs = [...documents, ...sharedDocuments];
+    console.log('Combined total:', allDocs.length);
+    console.log('All documents:', allDocs);
+
+    // Filter by category
+    if (selectedCategory !== "all") {
+      console.log('Filtering by category:', selectedCategory);
+      allDocs = allDocs.filter(doc => doc.type === selectedCategory);
+      console.log('After category filter:', allDocs.length);
+    }
+
+    // Filter by search term
+    if (searchTerm) {
+      console.log('Filtering by search term:', searchTerm);
+      allDocs = allDocs.filter(doc => 
+        doc.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        (doc.content && doc.content.toLowerCase().includes(searchTerm.toLowerCase()))
+      );
+      console.log('After search filter:', allDocs.length);
+    }
+
+    // Sort by date (most recent first)
+    allDocs.sort((a, b) => {
+      const dateA = a.sharedAt || a.createdAt;
+      const dateB = b.sharedAt || b.createdAt;
+      return dateB - dateA;
+    });
+
+    console.log('📋 Final filtered documents:', allDocs.length);
+    console.log('Filtered docs:', allDocs);
+    setFilteredDocs(allDocs);
+  }, [documents, sharedDocuments, selectedCategory, searchTerm]);
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+    } catch (error) {
+      console.error('Failed to log out:', error);
+    }
   };
 
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-indigo-900 flex items-center justify-center">
-        <div className="text-center">
-          <Spinner size="lg" className="mb-4" />
-          <p className="text-gray-600 dark:text-gray-400">Loading your team portal...</p>
-        </div>
-      </div>
-    );
-  }
+  const handleCreateDocument = async () => {
+    try {
+      await addDoc(collection(db, 'documents'), {
+        ...newDocument,
+        userId: currentUser.uid,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      });
+      setNewDocument({ title: "", content: "", type: "general" });
+      onOpenChange();
+    } catch (error) {
+      console.error('Error creating document:', error);
+    }
+  };
 
-  if (error) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-indigo-900 flex items-center justify-center">
-        <Card className="max-w-md">
-          <CardBody className="text-center">
-            <div className="text-red-500 mb-4">
-              <svg className="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
-              </svg>
-            </div>
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Error</h3>
-            <p className="text-gray-600 dark:text-gray-400 mb-4">{error}</p>
-            <Button onClick={() => window.location.reload()} color="primary">
-              Try Again
-            </Button>
-          </CardBody>
-        </Card>
-      </div>
-    );
-  }
+  const handleEditDocument = async () => {
+    if (!editingDoc) return;
+    
+    try {
+      await updateDoc(doc(db, 'documents', editingDoc.id), {
+        ...editingDoc,
+        updatedAt: new Date()
+      });
+      setEditingDoc(null);
+      onOpenChange();
+    } catch (error) {
+      console.error('Error updating document:', error);
+    }
+  };
 
-  if (!team) return null;
+  const handleDeleteDocument = async (docId) => {
+    if (window.confirm('Are you sure you want to delete this document?')) {
+      try {
+        await deleteDoc(doc(db, 'documents', docId));
+      } catch (error) {
+        console.error('Error deleting document:', error);
+      }
+    }
+  };
+
+  const getCategoryColor = (type) => {
+    const category = categories.find(cat => cat.key === type);
+    return category ? category.color : "default";
+  };
+
+  const getCategoryLabel = (type) => {
+    const category = categories.find(cat => cat.key === type);
+    return category ? category.label : type;
+  };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-indigo-900">
+    <PageTemplate>
       {/* Header */}
-      <header className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-md border-b border-gray-200/50 dark:border-gray-700/50">
+      <div className="bg-gradient-to-r from-beach-500 to-seafoam-500 text-white py-6">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-4">
-            <div className="flex items-center space-x-4">
-              <div className="w-10 h-10 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full flex items-center justify-center">
-                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                </svg>
-              </div>
-              <div>
-                <h1 className="text-2xl font-bold text-gray-900 dark:text-white">{team.name} Portal</h1>
-                <p className="text-gray-600 dark:text-gray-400">Team Dashboard</p>
-              </div>
-            </div>
-
-            <Dropdown>
-              <DropdownTrigger>
-                <Button variant="light" className="flex items-center space-x-2">
-                  <Avatar 
-                    name={team.name} 
-                    className="bg-gradient-to-r from-indigo-500 to-purple-500"
-                  />
-                  <span className="hidden sm:block text-gray-700 dark:text-gray-300">{team.name}</span>
-                </Button>
-              </DropdownTrigger>
-              <DropdownMenu aria-label="User menu">
-                <DropdownItem key="profile">Profile</DropdownItem>
-                <DropdownItem key="settings">Settings</DropdownItem>
-                <DropdownItem key="logout" color="danger" onClick={handleLogout}>
-                  Logout
-                </DropdownItem>
-              </DropdownMenu>
-            </Dropdown>
+          <div>
+            <h1 className="text-2xl sm:text-3xl font-lobster mb-2">
+              Team Portal - {userData?.username || userData?.teamName || 'Dashboard'}
+            </h1>
+            <p className="text-beach-100 font-ocean">
+              Manage your documents and access team resources
+            </p>
           </div>
         </div>
-      </header>
+      </div>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Team Info Card */}
-          <div className="lg:col-span-2">
-            <Card className="backdrop-blur-md bg-white/80 dark:bg-gray-800/80 border border-gray-200/50 dark:border-gray-700/50 shadow-xl">
-              <CardHeader className="pb-4">
-                <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Team Information</h2>
-              </CardHeader>
-              <CardBody className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide">Team Name</h3>
-                    <p className="mt-1 text-lg font-semibold text-gray-900 dark:text-white">{team.name}</p>
-                  </div>
-                  <div>
-                    <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide">Status</h3>
-                    <Chip 
-                      color="success" 
-                      variant="flat" 
-                      className="mt-1"
-                    >
-                      Active
-                    </Chip>
-                  </div>
-                  <div>
-                    <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide">Members</h3>
-                    <p className="mt-1 text-lg font-semibold text-gray-900 dark:text-white">
-                      {team.members?.length || 0} dancers
-                    </p>
-                  </div>
-                  <div>
-                    <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide">Founded</h3>
-                    <p className="mt-1 text-lg font-semibold text-gray-900 dark:text-white">
-                      {team.founded || '2024'}
-                    </p>
-                  </div>
-                </div>
-
-                <Divider />
-
-                <div>
-                  <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-3">Description</h3>
-                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                    {team.description || 'A competitive dance team dedicated to excellence and innovation in the art of dance.'}
-                  </p>
-                </div>
-              </CardBody>
-            </Card>
+      <div className="py-8 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          
+          {/* Document Sharing Section (for admins) */}
+          {userRole === 'admin' && (
+            <DocumentSharing currentUser={currentUser} userRole={userRole} />
+          )}
+          
+          {/* Controls */}
+          <div className="mb-8 flex flex-col sm:flex-row gap-4 items-center justify-between">
+            <div className="flex flex-col sm:flex-row gap-4 flex-1">
+              <Input
+                placeholder="Search documents..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="max-w-md font-ocean"
+                startContent={<span className="text-gray-400">🔍</span>}
+              />
+              
+              <div className="flex gap-2 flex-wrap">
+                {categories.map((category) => (
+                  <Chip
+                    key={category.key}
+                    color={selectedCategory === category.key ? category.color : "default"}
+                    variant={selectedCategory === category.key ? "solid" : "flat"}
+                    onClick={() => setSelectedCategory(category.key)}
+                    className="cursor-pointer font-ocean"
+                  >
+                    {category.label}
+                  </Chip>
+                ))}
+              </div>
+            </div>
           </div>
 
-          {/* Quick Actions */}
-          <div className="space-y-6">
-            <Card className="backdrop-blur-md bg-white/80 dark:bg-gray-800/80 border border-gray-200/50 dark:border-gray-700/50 shadow-xl">
-              <CardHeader className="pb-4">
-                <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Quick Actions</h2>
-              </CardHeader>
-              <CardBody className="space-y-4">
-                <Button 
-                  className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white"
-                  startContent={
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                    </svg>
-                  }
-                >
-                  Add Member
-                </Button>
-                <Button 
-                  variant="bordered"
-                  className="w-full border-indigo-600 text-indigo-600 hover:bg-indigo-600 hover:text-white"
-                  startContent={
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                    </svg>
-                  }
-                >
-                  View Schedule
-                </Button>
-                <Button 
-                  variant="bordered"
-                  className="w-full border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white"
-                  startContent={
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                    </svg>
-                  }
-                >
-                  Watch Videos
-                </Button>
-              </CardBody>
-            </Card>
-
-            {/* Recent Activity */}
-            <Card className="backdrop-blur-md bg-white/80 dark:bg-gray-800/80 border border-gray-200/50 dark:border-gray-700/50 shadow-xl">
-              <CardHeader className="pb-4">
-                <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Recent Activity</h2>
-              </CardHeader>
-              <CardBody className="space-y-4">
-                <div className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">Practice session completed</p>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">New member joined</p>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">Competition registration</p>
-                </div>
-              </CardBody>
-            </Card>
-          </div>
-        </div>
-
-        {/* Team Members Section */}
-        {team.members && team.members.length > 0 && (
-          <div className="mt-8">
-            <Card className="backdrop-blur-md bg-white/80 dark:bg-gray-800/80 border border-gray-200/50 dark:border-gray-700/50 shadow-xl">
-              <CardHeader className="pb-4">
-                <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Team Members</h2>
-              </CardHeader>
-              <CardBody>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {team.members.map((member, index) => (
-                    <div key={index} className="flex items-center space-x-3 p-3 rounded-lg bg-gray-50 dark:bg-gray-700/50">
-                      <Avatar 
-                        name={member.name} 
-                        className="bg-gradient-to-r from-indigo-500 to-purple-500"
-                      />
-                      <div>
-                        <p className="font-medium text-gray-900 dark:text-white">{member.name}</p>
-                        <p className="text-sm text-gray-500 dark:text-gray-400">{member.role}</p>
+          {/* Documents Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredDocs.map((doc) => (
+              <Card key={doc.id} className="bg-white/80 backdrop-blur-sm border border-sand-200 shadow-lg hover:shadow-xl transition-all duration-300">
+                <CardHeader className="pb-3">
+                  <div className="flex justify-between items-start w-full">
+                    <div className="flex-1">
+                      <h3 className="text-lg font-beach text-beach-700 mb-2 line-clamp-2">
+                        {doc.title}
+                      </h3>
+                      <Chip 
+                        size="sm" 
+                        color={getCategoryColor(doc.type)}
+                        variant="flat"
+                        className="font-ocean"
+                      >
+                        {getCategoryLabel(doc.type)}
+                      </Chip>
+                    </div>
+                  </div>
+                </CardHeader>
+                
+                <CardBody className="pt-0">
+                  {doc.isShared ? (
+                    <div className="space-y-3">
+                      <div className="flex items-center gap-2">
+                        <Chip size="sm" color="success" variant="flat">
+                          Shared by Admin
+                        </Chip>
+                      </div>
+                      
+                      {doc.downloadURL && (
+                        <a
+                          href={doc.downloadURL}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block"
+                        >
+                          <Button
+                            size="sm"
+                            color="primary"
+                            className="w-full"
+                          >
+                            📥 Download {doc.fileName || 'File'}
+                          </Button>
+                        </a>
+                      )}
+                      
+                      {doc.googleDriveLink && (
+                        <a
+                          href={doc.googleDriveLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block"
+                        >
+                          <Button
+                            size="sm"
+                            color="primary"
+                            className="w-full"
+                          >
+                            📄 Open Google Drive
+                          </Button>
+                        </a>
+                      )}
+                      
+                      <div className="text-xs text-beach-500 font-ocean">
+                        Shared: {doc.sharedAt?.toDate?.()?.toLocaleDateString() || 'Recently'}
                       </div>
                     </div>
-                  ))}
-                </div>
-              </CardBody>
-            </Card>
+                  ) : (
+                    <>
+                      <p className="text-sm text-beach-600 font-ocean mb-4 line-clamp-3">
+                        {doc.content}
+                      </p>
+                      
+                      <div className="flex justify-between items-center text-xs text-beach-500 font-ocean">
+                        <span>
+                          {doc.createdAt?.toDate?.()?.toLocaleDateString() || 'Recently'}
+                        </span>
+                        <div className="flex gap-2">
+                          <Button
+                            size="sm"
+                            variant="flat"
+                            color="primary"
+                            onClick={() => {
+                              setEditingDoc(doc);
+                              onOpen();
+                            }}
+                          >
+                            Edit
+                          </Button>
+                          <Button
+                            size="sm"
+                            variant="flat"
+                            color="danger"
+                            onClick={() => handleDeleteDocument(doc.id)}
+                          >
+                            Delete
+                          </Button>
+                        </div>
+                      </div>
+                    </>
+                  )}
+                </CardBody>
+              </Card>
+            ))}
           </div>
-        )}
-      </main>
-    </div>
+
+          {filteredDocs.length === 0 && (
+            <div className="text-center py-12">
+              <div className="text-6xl mb-4">📁</div>
+              <h3 className="text-xl font-beach text-beach-700 mb-2">No Documents Found</h3>
+              <p className="text-beach-600 font-ocean">
+                {searchTerm || selectedCategory !== "all" 
+                  ? "Try adjusting your search or filters"
+                  : "Create your first document to get started"
+                }
+              </p>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Create/Edit Document Modal */}
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="2xl">
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader className="flex flex-col gap-1">
+                <h3 className="text-xl font-lobster text-beach-700">
+                  {editingDoc ? 'Edit Document' : 'Create New Document'}
+                </h3>
+              </ModalHeader>
+              <ModalBody>
+                <div className="space-y-4">
+                  <Input
+                    label="Document Title"
+                    placeholder="Enter document title"
+                    value={editingDoc ? editingDoc.title : newDocument.title}
+                    onChange={(e) => 
+                      editingDoc 
+                        ? setEditingDoc({...editingDoc, title: e.target.value})
+                        : setNewDocument({...newDocument, title: e.target.value})
+                    }
+                    className="font-ocean"
+                  />
+                  
+                  <div className="flex gap-4">
+                    {categories.slice(1).map((category) => (
+                      <Chip
+                        key={category.key}
+                        color={((editingDoc ? editingDoc.type : newDocument.type) === category.key) ? category.color : "default"}
+                        variant={((editingDoc ? editingDoc.type : newDocument.type) === category.key) ? "solid" : "flat"}
+                        onClick={() => 
+                          editingDoc 
+                            ? setEditingDoc({...editingDoc, type: category.key})
+                            : setNewDocument({...newDocument, type: category.key})
+                        }
+                        className="cursor-pointer font-ocean"
+                      >
+                        {category.label}
+                      </Chip>
+                    ))}
+                  </div>
+                  
+                  <textarea
+                    className="w-full p-3 border border-gray-300 rounded-lg font-ocean resize-none"
+                    rows={6}
+                    placeholder="Enter document content..."
+                    value={editingDoc ? editingDoc.content : newDocument.content}
+                    onChange={(e) => 
+                      editingDoc 
+                        ? setEditingDoc({...editingDoc, content: e.target.value})
+                        : setNewDocument({...newDocument, content: e.target.value})
+                    }
+                  />
+                </div>
+              </ModalBody>
+              <ModalFooter>
+                <Button color="danger" variant="light" onPress={onClose}>
+                  Cancel
+                </Button>
+                <Button 
+                  color="primary" 
+                  onPress={editingDoc ? handleEditDocument : handleCreateDocument}
+                  className="font-comfortaa"
+                >
+                  {editingDoc ? 'Update' : 'Create'}
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
+    </PageTemplate>
   );
 }

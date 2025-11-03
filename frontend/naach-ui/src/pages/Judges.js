@@ -1,150 +1,97 @@
 import React from "react";
-import { Link as RouterLink } from "react-router-dom";
-import {
-  Card,
-  CardBody,
-  CardHeader,
-  Avatar,
-  Chip,
-} from "@heroui/react";
 import PageTemplate from "../components/PageTemplate";
-
-// Judges data
-const judges = [
-  {
-    name: "Dr. Priya Sharma",
-    credentials: "Ph.D. in Dance Studies, NYU",
-    experience: "15+ years",
-    bio: "Renowned dance scholar and former professional dancer with expertise in classical Indian dance forms and contemporary fusion styles.",
-    specialty: "Classical & Contemporary Fusion"
-  },
-  {
-    name: "Marcus Rodriguez",
-    credentials: "MFA in Choreography, Juilliard",
-    experience: "12+ years",
-    bio: "Award-winning choreographer and former principal dancer with extensive experience in urban dance and hip-hop culture.",
-    specialty: "Urban Dance & Hip-Hop"
-  },
-  {
-    name: "Sarah Chen",
-    credentials: "BFA in Dance Performance, UCLA",
-    experience: "10+ years",
-    bio: "Professional dancer and choreographer specializing in contemporary dance with a focus on innovative movement and storytelling.",
-    specialty: "Contemporary & Modern"
-  },
-  {
-    name: "Raj Patel",
-    credentials: "Masters in Dance Education, Columbia",
-    experience: "18+ years",
-    bio: "Esteemed dance educator and former competitive dancer with deep knowledge of traditional Indian dance forms and their modern adaptations.",
-    specialty: "Traditional Indian Dance"
-  },
-  {
-    name: "Jennifer Williams",
-    credentials: "Ph.D. in Performance Studies, Stanford",
-    experience: "20+ years",
-    bio: "Distinguished dance historian and critic with expertise in evaluating technical precision, artistic expression, and cultural authenticity.",
-    specialty: "Technical Analysis & Cultural Context"
-  },
-  {
-    name: "Carlos Mendez",
-    credentials: "Professional Dancer & Choreographer",
-    experience: "14+ years",
-    bio: "Versatile dancer and choreographer with experience in multiple dance styles, from classical ballet to contemporary fusion.",
-    specialty: "Multi-Style Evaluation"
-  }
-];
 
 export default function Judges() {
   return (
     <PageTemplate>
-      {/* Hero Section with Beach Background */}
-      <div className="bg-gradient-to-br from-coral-100 via-sand-100 to-beach-100 py-12 sm:py-16 lg:py-20 px-4 sm:px-6 relative overflow-hidden">
+      {/* Hero Section */}
+      <div className="relative py-12 sm:py-16 lg:py-20 overflow-hidden">
+        {/* Background beach elements */}
+        <div className="absolute inset-0 bg-gradient-to-br from-sand-100 via-beach-50 to-seafoam-100"></div>
+        
         {/* Floating beach elements */}
-        <div className="absolute top-6 sm:top-10 left-4 sm:left-10 animate-float">
-          <div className="w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 bg-coral-200/60 rounded-full backdrop-blur-sm"></div>
+        <div className="absolute top-20 left-10 w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 bg-gradient-to-r from-seafoam-300 to-coral-300 rounded-full opacity-60 animate-float">
+          <span className="text-2xl sm:text-3xl">🏖️</span>
         </div>
-        <div className="absolute top-12 sm:top-20 right-4 sm:right-20 animate-float" style={{ animationDelay: '2s' }}>
-          <div className="w-10 h-10 sm:w-12 sm:h-12 lg:w-16 lg:h-16 bg-sand-200/60 rounded-full backdrop-blur-sm"></div>
+        <div className="absolute top-32 right-16 w-8 h-8 sm:w-12 sm:h-12 lg:w-16 lg:h-16 bg-gradient-to-r from-beach-300 to-sand-300 rounded-full opacity-60 animate-float flex items-center justify-center" style={{ animationDelay: '1s' }}>
+          <span className="text-lg sm:text-xl">🌊</span>
+        </div>
+        <div className="absolute bottom-20 left-1/4 w-10 h-10 sm:w-14 sm:h-14 lg:w-18 lg:h-18 bg-gradient-to-r from-coral-300 to-seafoam-300 rounded-full opacity-60 animate-float flex items-center justify-center" style={{ animationDelay: '2s' }}>
+          <span className="text-xl sm:text-2xl">🐚</span>
         </div>
         
-        <div className="max-w-6xl mx-auto text-center relative z-10">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-beach text-coral-700 mb-4 sm:mb-6 animate-fade-in">
-            Meet Our Judges
-          </h1>
-          <p className="text-lg sm:text-xl md:text-2xl text-coral-600 font-ocean mb-6 sm:mb-8 animate-slide-up px-4">
-            Distinguished dance professionals and scholars who bring expertise, 
-            experience, and passion to evaluate every performance with fairness and insight.
-          </p>
-          <div className="w-16 sm:w-20 lg:w-24 h-1 bg-gradient-to-r from-coral-400 to-sand-400 mx-auto rounded-full"></div>
+        {/* Additional beach elements */}
+        <div className="absolute top-16 right-1/3 w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-r from-yellow-300 to-orange-300 rounded-full opacity-70 animate-float" style={{ animationDelay: '0.5s' }}>
+          <span className="text-sm sm:text-base">⭐</span>
         </div>
-      </div>
-
-      {/* Judges Grid */}
-      <div className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 bg-gradient-to-b from-sand-50 to-beach-50">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
-            {judges.map((judge, index) => (
-              <Card 
-                key={index}
-                className="bg-white/80 backdrop-blur-sm border border-sand-200 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 animate-fade-in"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <CardHeader className="text-center pb-3 sm:pb-4">
-                  <div className="flex justify-center mb-3 sm:mb-4">
-                    <Avatar 
-                      name={judge.name}
-                      className="w-16 h-16 sm:w-20 sm:h-20 text-lg sm:text-xl font-bold bg-gradient-to-r from-beach-400 to-seafoam-400"
-                    />
-                  </div>
-                  <div>
-                    <h3 className="text-lg sm:text-xl font-beach text-beach-700 mb-1 sm:mb-2">
-                      {judge.name}
-                    </h3>
-                    <p className="text-xs sm:text-sm text-beach-500 font-ocean mb-1 sm:mb-2">
-                      {judge.credentials}
-                    </p>
-                    <Chip 
-                      color="primary" 
-                      variant="flat" 
-                      size="sm"
-                      className="text-xs sm:text-sm"
-                    >
-                      {judge.experience}
-                    </Chip>
-                  </div>
-                </CardHeader>
-                <CardBody className="p-4 sm:p-6">
-                  <p className="text-xs sm:text-sm text-beach-600 font-ocean mb-3 sm:mb-4 leading-relaxed">
-                    {judge.bio}
-                  </p>
-                  <div className="text-center">
-                    <Chip 
-                      color="secondary" 
-                      variant="flat" 
-                      size="sm"
-                      className="text-xs sm:text-sm"
-                    >
-                      {judge.specialty}
-                    </Chip>
-                  </div>
-                </CardBody>
-              </Card>
-            ))}
+        <div className="absolute bottom-16 right-1/4 w-5 h-5 sm:w-7 sm:h-7 bg-gradient-to-r from-pink-300 to-coral-300 rounded-full opacity-70 animate-float" style={{ animationDelay: '1.5s' }}>
+          <span className="text-xs sm:text-sm">💎</span>
+        </div>
+        
+        <div className="max-w-6xl mx-auto text-center relative z-10 px-4 sm:px-6 lg:px-8">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-beach text-beach-700 mb-4 sm:mb-6 animate-fade-in drop-shadow-lg">
+            Judges
+          </h1>
+          <p className="text-lg sm:text-xl md:text-2xl text-seafoam-600 font-ocean mb-6 sm:mb-8 animate-slide-up px-4 leading-relaxed max-w-4xl mx-auto">
+            Meet the distinguished panel of dance experts and industry professionals
+          </p>
+          
+          {/* Enhanced decorative wave line */}
+          <div className="w-16 sm:w-20 lg:w-24 h-1 bg-gradient-to-r from-transparent via-beach-400 to-transparent rounded-full mx-auto shadow-lg mb-4">
           </div>
         </div>
       </div>
 
-      {/* Call to Action */}
-      <div className="bg-gradient-to-r from-beach-500 to-seafoam-500 py-16 px-4">
+      {/* Stay Tuned Section */}
+      <div className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 bg-gradient-to-b from-sand-50 to-beach-50">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-beach text-white mb-6">
-            Fair & Expert Evaluation
-          </h2>
-          <p className="text-xl text-beach-100 mb-8 font-ocean">
-            Our judges bring diverse perspectives and deep expertise to ensure 
-            every performance is evaluated with the highest standards of fairness and professionalism.
-          </p>
+          {/* Main content card */}
+          <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 sm:p-12 lg:p-16 border-2 border-sand-200 shadow-2xl animate-fade-in">
+            {/* Large emoji */}
+            <div className="text-8xl sm:text-9xl mb-6 sm:mb-8 animate-bounce" style={{ animationDuration: '3s' }}>
+              🎭
+            </div>
+            
+            {/* Main message */}
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-lobster text-beach-700 mb-6 sm:mb-8 animate-slide-up">
+              Stay Tuned!
+            </h2>
+            
+            <p className="text-lg sm:text-xl md:text-2xl text-beach-600 font-ocean mb-8 sm:mb-10 leading-relaxed animate-slide-up" style={{ animationDelay: '0.2s' }}>
+              We're working hard to bring you an incredible lineup of judges for this year's competition.
+            </p>
+            
+            {/* Additional info */}
+            <div className="bg-gradient-to-r from-beach-100 to-seafoam-100 rounded-2xl p-6 sm:p-8 mb-6 sm:mb-8 animate-slide-up" style={{ animationDelay: '0.4s' }}>
+              <p className="text-base sm:text-lg text-beach-700 font-comfortaa font-semibold mb-2">
+                🎪 Coming Soon
+              </p>
+              <p className="text-sm sm:text-base text-beach-600 font-ocean">
+                Follow us on social media and check back regularly for updates on our judging panel!
+              </p>
+            </div>
+            
+            {/* Call to action */}
+            <div className="animate-slide-up" style={{ animationDelay: '0.6s' }}>
+              <p className="text-base sm:text-lg text-beach-600 font-ocean mb-4">
+                In the meantime, explore our other pages to learn more about the competition!
+              </p>
+              <div className="flex flex-col sm:flex-row justify-center gap-4">
+                <a 
+                  href="/teams" 
+                  className="inline-block bg-gradient-to-r from-sand-400 to-sand-500 text-sand-900 px-6 sm:px-8 py-3 sm:py-4 rounded-full text-sm sm:text-base font-bungee font-semibold hover:from-sand-500 hover:to-sand-600 transform hover:scale-105 transition-all duration-300 shadow-lg"
+                >
+                  View Teams
+                </a>
+                <a 
+                  href="/schedule" 
+                  className="inline-block bg-gradient-to-r from-beach-400 to-beach-500 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full text-sm sm:text-base font-bungee font-semibold hover:from-beach-500 hover:to-beach-600 transform hover:scale-105 transition-all duration-300 shadow-lg"
+                >
+                  Event Schedule
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </PageTemplate>

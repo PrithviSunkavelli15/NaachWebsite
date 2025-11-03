@@ -1,348 +1,238 @@
 import React from "react";
-import { Link as RouterLink } from "react-router-dom";
-import { Button, Card, CardBody, CardHeader } from "@heroui/react";
+import { Card, CardBody, Button } from "@heroui/react";
 import PageTemplate from "../components/PageTemplate";
 
-export default function Board2_0() {
+const Board2_0 = () => {
   const committees = [
-    // Executive Committee
+    // Row 1: Directors (1 committee, centered, larger)
     {
-      title: "Executive Director",
-      icon: "🏮",
-      description: "Leading the vision and strategic direction of NJ NAACH 2.0, ensuring every event creates waves of excitement and community impact.",
-      color: "from-beach-400 to-beach-500",
-      textColor: "text-beach-100",
-      focus: "Event Strategy & Community Engagement",
-      passion: "Building inclusive dance communities",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-      name: "TBD",
-      email: "executive@njnaach.org"
+      name: "Meghna Prakash, Farhan Shah, Jasmine Patel",
+      image: "/Board2.0/15.png",
+      isLarge: true,
+      isCentered: true,
+      position: "Directors"
+    },
+    // Row 2: Senior Advisors, Judging, Registration (3 committees)
+    {
+      name: "Ananya Marathe, Khush Diora, Nishi Patel",
+      image: "/Board2.0/1.png",
+      position: "Senior Advisors"
     },
     {
-      title: "Technical Director", 
-      icon: "⚓",
-      description: "Overseeing all technical aspects of our events, from sound systems to digital experiences that enhance the dance competition.",
-      color: "from-seafoam-400 to-seafoam-500",
-      textColor: "text-seafoam-100",
-      focus: "Technical Excellence & Innovation",
-      passion: "Creating seamless event experiences",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face",
-      name: "TBD",
-      email: "technical@njnaach.org"
+      name: "Saumya Mavuri",
+      image: "/Board2.0/2.png",
+      position: "Judging"
     },
     {
-      title: "Creative Director",
-      icon: "🧭", 
-      description: "Crafting the artistic vision and creative direction that makes NJ NAACH 2.0 a unique and memorable experience for all.",
-      color: "from-sand-400 to-sand-500",
-      textColor: "text-sand-100",
-      focus: "Creative Vision & Brand Experience",
-      passion: "Artistic expression through dance",
-      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-      name: "TBD",
-      email: "creative@njnaach.org"
+      name: "Adarsh Patel, Preya Patel",
+      image: "/Board2.0/3.png",
+      position: "Registration"
     },
-    
-    // Operations Committee
+    // Row 3: Logistics, Finance, Social (3 committees)
     {
-      title: "Operations Manager",
-      icon: "🛟",
-      description: "Ensuring smooth operations and logistics for every NJ NAACH 2.0 event, from planning to execution with precision.",
-      color: "from-coral-400 to-coral-500",
-      textColor: "text-coral-100",
-      focus: "Event Operations & Logistics",
-      passion: "Perfect execution of great ideas",
-      image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=300&fit=crop&crop=face",
-      name: "TBD",
-      email: "operations@njnaach.org"
+      name: "Ria Sharma, Shatkratu Swarnkar, Riddhi Gandhi",
+      image: "/Board2.0/4.png",
+      position: "Logistics"
     },
     {
-      title: "Logistics Coordinator",
-      icon: "🗺️",
-      description: "Managing the intricate details of event planning, transportation, and coordination to ensure everything runs smoothly.",
-      color: "from-beach-400 to-beach-500",
-      textColor: "text-beach-100",
-      focus: "Planning & Coordination",
-      passion: "Organizing seamless experiences",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-      name: "TBD",
-      email: "logistics@njnaach.org"
+      name: "Himit Shah, Ojal Khubchandani",
+      image: "/Board2.0/5.png",
+      position: "Finance"
     },
     {
-      title: "Venue Coordinator",
-      icon: "🏖️",
-      description: "Securing and managing the perfect venues that capture the Jersey Shore atmosphere and accommodate our growing community.",
-      color: "from-seafoam-400 to-seafoam-500",
-      textColor: "text-seafoam-100",
-      focus: "Venue Management & Setup",
-      passion: "Creating perfect event spaces",
-      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&h=300&fit=crop&crop=face",
-      name: "TBD",
-      email: "venue@njnaach.org"
+      name: "Kenz Mehaboob, Diya Kumar, Sahil Mittal",
+      image: "/Board2.0/8.png",
+      position: "Social"
     },
-    
-    // Event Committee
+    // Row 4: Public Relations/Graphic Design, Head Liaisons, Tech (3 committees)
     {
-      title: "Event Coordinator",
-      icon: "🐚",
-      description: "Orchestrating the flow of events and ensuring every moment of NJ NAACH 2.0 is engaging and memorable for participants.",
-      color: "from-sand-400 to-sand-500",
-      textColor: "text-sand-100",
-      focus: "Event Flow & Engagement",
-      passion: "Creating unforgettable moments",
-      image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=300&h=300&fit=crop&crop=face",
-      name: "TBD",
-      email: "events@njnaach.org"
+      name: "Sana Raza, Srikar Kandulapati, Sancharitha Ramji",
+      image: "/Board2.0/13.png",
+      position: "Public Relations & Graphic Design"
     },
     {
-      title: "Stage Manager",
-      icon: "🏄",
-      description: "Managing stage operations and ensuring smooth transitions between performances for the ultimate viewing experience.",
-      color: "from-coral-400 to-coral-500",
-      textColor: "text-coral-100",
-      focus: "Stage Operations & Transitions",
-      passion: "Smooth performance flow",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-      name: "TBD",
-      email: "stage@njnaach.org"
+      name: "Adviatha Kamalakkannan, Nikhilesh Machan",
+      image: "/Board2.0/7.png",
+      position: "Head Liaisons"
     },
     {
-      title: "Entertainment Director",
-      icon: "🏐",
-      description: "Curating entertainment experiences and ensuring the energy stays high throughout the entire NJ NAACH 2.0 event.",
-      color: "from-beach-400 to-beach-500",
-      textColor: "text-beach-100",
-      focus: "Entertainment & Energy",
-      passion: "Keeping the vibe alive",
-      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&h=300&fit=crop&crop=face",
-      name: "TBD",
-      email: "entertainment@njnaach.org"
+      name: "Nisarg Mehta, Jay Patel",
+      image: "/Board2.0/10.png",
+      position: "Tech"
     },
-    
-    // Marketing & Outreach
+    // Row 5: Hospitality, Philanthropy, Creative (3 committees)
     {
-      title: "Marketing Director",
-      icon: "📢",
-      description: "Spreading the word about NJ NAACH 2.0 and building excitement for our events through creative marketing strategies.",
-      color: "from-seafoam-400 to-seafoam-500",
-      textColor: "text-seafoam-100",
-      focus: "Brand Marketing & Promotion",
-      passion: "Telling compelling stories",
-      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&h=300&fit=crop&crop=face",
-      name: "TBD",
-      email: "marketing@njnaach.org"
+      name: "Chandni Shah, Sahaana Shastri, Khushmeet Vassan",
+      image: "/Board2.0/14.png",
+      position: "Hospitality"
     },
     {
-      title: "Social Media Manager",
-      icon: "📸",
-      description: "Managing our digital presence and engaging with the NJ NAACH 2.0 community across all social media platforms.",
-      color: "from-sand-400 to-sand-500",
-      textColor: "text-sand-100",
-      focus: "Digital Engagement & Content",
-      passion: "Building online communities",
-      image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=300&h=300&fit=crop&crop=face",
-      name: "TBD",
-      email: "social@njnaach.org"
+      name: "Vinit Shenoy",
+      image: "/Board2.0/9.png",
+      position: "Philanthropy"
     },
     {
-      title: "Community Relations",
-      icon: "🌉",
-      description: "Building strong partnerships with local communities and organizations to expand our reach across the Jersey Shore.",
-      color: "from-coral-400 to-coral-500",
-      textColor: "text-coral-100",
-      focus: "Community Partnerships & Outreach",
-      passion: "Connecting people through dance",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-      name: "TBD",
-      email: "community@njnaach.org"
+      name: "Kavya Jain",
+      image: "/Board2.0/12.png",
+      position: "Creative"
     },
-    
-    // Support Committee
+    // Row 6: Sponsorship, Freshman Reps (2 committees)
     {
-      title: "Volunteer Coordinator",
-      icon: "🛟",
-      description: "Recruiting, training, and managing our amazing volunteers who make NJ NAACH 2.0 events possible and successful.",
-      color: "from-beach-400 to-beach-500",
-      textColor: "text-beach-100",
-      focus: "Volunteer Management & Support",
-      passion: "Empowering others to help",
-      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&h=300&fit=crop&crop=face",
-      name: "TBD",
-      email: "volunteers@njnaach.org"
+      name: "Khushi Shah, Aman Thakkar, Netra Patel",
+      image: "/Board2.0/11.png",
+      position: "Sponsorship"
     },
     {
-      title: "Sponsorship Manager",
-      icon: "💎",
-      description: "Building valuable partnerships with sponsors and securing resources to make NJ NAACH 2.0 bigger and better each year.",
-      color: "from-seafoam-400 to-seafoam-500",
-      textColor: "text-seafoam-100",
-      focus: "Partnership Development & Growth",
-      passion: "Building lasting relationships",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-      name: "TBD",
-      email: "sponsorship@njnaach.org"
-    },
-    {
-      title: "Philanthropy Director",
-      icon: "💙",
-      description: "Leading our charitable initiatives and ensuring NJ NAACH 2.0 makes a positive impact on the communities we serve.",
-      color: "from-sand-400 to-sand-500",
-      textColor: "text-sand-100",
-      focus: "Charitable Impact & Giving",
-      passion: "Making a difference through dance",
-      image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=300&h=300&fit=crop&crop=face",
-      name: "TBD",
-      email: "philanthropy@njnaach.org"
+      name: "Nayan Yadav, Rajvi Maniar, Sanskriti Ramji, Prithvi Sunkavelli",
+      image: "/Board2.0/6.png",
+      position: "Freshman Representatives"
     }
   ];
 
-  return (
-    <PageTemplate>
-      {/* Hero Section */}
-      <div className="bg-gradient-to-br from-beach-100 via-seafoam-100 to-sand-100 py-12 sm:py-16 lg:py-20 px-4 sm:px-6 relative overflow-hidden">
-        {/* Floating beach elements */}
-        <div className="absolute top-6 sm:top-10 left-4 sm:left-10 animate-float">
-          <div className="text-2xl sm:text-4xl">🏖️</div>
-        </div>
-        <div className="absolute top-12 sm:top-20 right-4 sm:right-20 animate-float" style={{ animationDelay: '2s' }}>
-          <div className="text-xl sm:text-3xl">🎪</div>
-        </div>
-        <div className="absolute bottom-12 sm:bottom-20 left-4 sm:left-20 animate-float" style={{ animationDelay: '4s' }}>
-          <div className="text-xl sm:text-3xl">⚓</div>
+  const renderCommitteeCard = (committee, index, isLarge = false) => {
+    const cardSize = isLarge ? "w-96 h-96 sm:w-[36rem] sm:h-[28rem] lg:w-[48rem] lg:h-[28rem]" : "w-80 h-80 sm:w-96 sm:h-96 lg:w-96 lg:h-96";
+    
+    return (
+      <Card
+        key={index}
+        className={`${cardSize} bg-white/80 backdrop-blur-sm border border-sand-200 shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 animate-fade-in overflow-hidden`}
+        style={{ animationDelay: `${index * 0.1}s` }}
+      >
+        {/* Committee Image */}
+        <div className="w-full h-[85%] relative overflow-hidden group">
+          <img
+            src={committee.image}
+            alt={committee.name}
+            className="w-full h-full object-cover transition-all duration-300 group-hover:scale-110"
+          />
+          {/* Hover Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/60 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-end">
+            <div className="p-3 sm:p-4 w-full">
+              <h3 className="text-lg sm:text-xl lg:text-2xl font-beach text-white text-center drop-shadow-lg">
+                {committee.position || committee.hoverText || committee.name}
+              </h3>
+            </div>
+          </div>
         </div>
         
-        <div className="max-w-6xl mx-auto text-center relative z-10">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-beach text-beach-700 mb-4 sm:mb-6 animate-fade-in">
-            Our Board - NAACH 2.0
-          </h1>
-          <p className="text-lg sm:text-xl md:text-2xl text-beach-600 font-ocean mb-6 sm:mb-8 animate-slide-up px-4">
-            Meet the passionate leaders behind NJ NAACH 2.0
+        {/* Committee Name */}
+        <CardBody className="h-[15%] p-2 text-center flex flex-col justify-center overflow-hidden">
+          <p className="text-beach-700 font-beach text-xs sm:text-sm line-clamp-1">
+            {committee.name}
           </p>
-          <p className="text-base sm:text-lg text-beach-600 font-ocean mb-6 sm:mb-8 animate-slide-up px-4">
-            Our 15 committees work together like the tides and waves to create the ultimate dance competition experience
-          </p>
-          <div className="w-16 sm:w-20 lg:w-24 h-1 bg-gradient-to-r from-beach-400 to-seafoam-400 mx-auto rounded-full"></div>
-        </div>
-      </div>
+        </CardBody>
+      </Card>
+    );
+  };
 
-      {/* Committee Grid */}
-      <div className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 bg-gradient-to-b from-beach-50 to-sand-50">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-beach text-beach-700 text-center mb-8 sm:mb-12">
-            Our Committee Structure
-          </h2>
+  return (
+    <PageTemplate>
+      <div className="min-h-screen bg-gradient-to-br from-sand-100 via-beach-50 to-seafoam-100 py-12 sm:py-16 lg:py-20">
+        {/* Hero Section */}
+        <div className="relative overflow-hidden">
+          {/* Background beach elements */}
+          <div className="absolute inset-0 bg-gradient-to-br from-sand-100 via-beach-50 to-seafoam-100"></div>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-            {committees.map((committee, index) => (
-              <Card 
-                key={index}
-                className="bg-white/80 backdrop-blur-sm border border-sand-200 shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 animate-fade-in overflow-hidden"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                {/* Committee Picture with Hover Effect */}
-                <div className="relative h-48 sm:h-56 lg:h-64 overflow-hidden">
-                  <img 
-                    src={committee.image} 
-                    alt={committee.name}
-                    className="w-full h-full object-cover transition-all duration-300"
-                  />
-                  {/* Hover Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/60 opacity-0 hover:opacity-100 transition-all duration-300 flex items-end">
-                    <div className="p-3 sm:p-4 w-full">
-                      <h3 className="text-lg sm:text-xl lg:text-2xl font-beach text-white text-center drop-shadow-lg">
-                        {committee.title}
-                      </h3>
-                    </div>
-                  </div>
-                </div>
-                
-                <CardBody className="p-4 sm:p-6 text-center">
-                  {/* Person's Name */}
-                  <h4 className="text-lg sm:text-xl font-beach text-beach-700 mb-2 sm:mb-3">
-                    {committee.name}
-                  </h4>
-                  
-                  {/* Committee Description */}
-                  <p className="text-beach-700 font-ocean mb-3 sm:mb-4 text-xs sm:text-sm leading-relaxed">
-                    {committee.description}
-                  </p>
-                  
-                  {/* Focus and Passion */}
-                  <div className="space-y-1 sm:space-y-2 text-xs text-beach-600 font-ocean mb-4 sm:mb-6">
-                    <p className="font-semibold">🎯 {committee.focus}</p>
-                    <p className="font-semibold">💙 {committee.passion}</p>
-                  </div>
-                  
-                  {/* Contact Button */}
-                  <Button
-                    as="a"
-                    href={`mailto:${committee.email}`}
-                    size="sm"
-                    className="w-full bg-gradient-to-r from-sand-400 to-sand-500 text-sand-900 font-ocean font-semibold hover:from-sand-500 hover:to-sand-600 transform hover:scale-105 transition-all duration-300 text-xs sm:text-sm"
-                  >
-                    📧 Contact {committee.name.split(' ')[0]}
-                  </Button>
-                </CardBody>
-              </Card>
-            ))}
+          {/* Floating beach elements */}
+          <div className="absolute top-20 left-10 w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 bg-gradient-to-r from-seafoam-300 to-coral-300 rounded-full opacity-60 animate-float">
+            <span className="text-2xl sm:text-3xl">🏖️</span>
+          </div>
+          <div className="absolute top-32 right-16 w-8 h-8 sm:w-12 sm:h-12 lg:w-16 lg:h-16 bg-gradient-to-r from-beach-300 to-sand-300 rounded-full opacity-60 animate-float flex items-center justify-center" style={{ animationDelay: '1s' }}>
+            <span className="text-lg sm:text-xl">🌊</span>
+          </div>
+          <div className="absolute bottom-20 left-1/4 w-10 h-10 sm:w-14 sm:h-14 lg:w-18 lg:h-18 bg-gradient-to-r from-coral-300 to-seafoam-300 rounded-full opacity-60 animate-float flex items-center justify-center" style={{ animationDelay: '2s' }}>
+            <span className="text-xl sm:text-2xl">🐚</span>
+          </div>
+          
+          <div className="max-w-6xl mx-auto text-center relative z-10 px-4 sm:px-6 lg:px-8">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-beach text-beach-700 mb-4 sm:mb-6 animate-fade-in drop-shadow-lg">
+              NAACH 2.0 Board
+            </h1>
+            <p className="text-lg sm:text-xl md:text-2xl text-seafoam-600 font-ocean mb-6 sm:mb-8 animate-slide-up px-4 leading-relaxed max-w-4xl mx-auto">
+              Meet the dedicated team behind NJ NAACH 2.0
+            </p>
+            
+            {/* Enhanced decorative wave line */}
+            <div className="w-16 sm:w-20 lg:w-24 h-1 bg-gradient-to-r from-transparent via-beach-400 to-transparent rounded-full mx-auto shadow-lg mb-4"></div>
           </div>
         </div>
-      </div>
 
-      {/* Mission & Values */}
-      <div className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 bg-gradient-to-b from-sand-50 to-beach-50">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-beach text-beach-700 text-center mb-8 sm:mb-12">
-            Our Mission & Values
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-            <Card className="bg-white/80 backdrop-blur-sm border border-sand-200 shadow-xl">
-              <CardBody className="p-6 sm:p-8">
-                <div className="text-4xl sm:text-5xl mb-3 sm:mb-4">🎯</div>
-                <h3 className="text-xl sm:text-2xl font-beach text-beach-700 mb-3 sm:mb-4">Our Mission</h3>
-                <p className="text-sm sm:text-base lg:text-lg text-beach-600 font-ocean leading-relaxed">
-                  To create an inclusive platform that celebrates South Asian dance culture while fostering 
-                  community connections and supporting philanthropic causes across the Jersey Shore region.
-                </p>
-              </CardBody>
-            </Card>
+        {/* Committee Grid */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Row 1: Directors (1 committee, centered, larger) */}
+          <div className="flex justify-center mb-16 sm:mb-20 lg:mb-24 mt-8 sm:mt-12 lg:mt-16">
+            {renderCommitteeCard(committees[0], 0, true)}
+          </div>
 
-            <Card className="bg-white/80 backdrop-blur-sm border border-sand-200 shadow-xl">
-              <CardBody className="p-6 sm:p-8">
-                <div className="text-4xl sm:text-5xl mb-3 sm:mb-4">💎</div>
-                <h3 className="text-xl sm:text-2xl font-beach text-beach-700 mb-3 sm:mb-4">Our Values</h3>
-                <ul className="text-sm sm:text-base lg:text-lg text-beach-600 font-ocean space-y-1 sm:space-y-2">
-                  <li>• Inclusivity & Diversity</li>
-                  <li>• Artistic Excellence</li>
-                  <li>• Community Impact</li>
-                  <li>• Innovation & Growth</li>
-                  <li>• Cultural Preservation</li>
-                </ul>
-              </CardBody>
-            </Card>
+          {/* Row 2: Senior Advisors, Judging, Registration (3 committees) */}
+          <div className="flex justify-center space-x-8 sm:space-x-12 lg:space-x-16 mb-16 sm:mb-20 lg:mb-24">
+            {committees.slice(1, 4).map((committee, index) => 
+              renderCommitteeCard(committee, index + 1)
+            )}
+          </div>
+
+          {/* Row 3: Logistics, Finance, Social (3 committees) */}
+          <div className="flex justify-center space-x-8 sm:space-x-12 lg:space-x-16 mb-16 sm:mb-20 lg:mb-24">
+            {committees.slice(4, 7).map((committee, index) => 
+              renderCommitteeCard(committee, index + 4)
+            )}
+          </div>
+
+          {/* Row 4: Public Relations/Graphic Design, Head Liaisons, Tech (3 committees) */}
+          <div className="flex justify-center space-x-8 sm:space-x-12 lg:space-x-16 mb-16 sm:mb-20 lg:mb-24">
+            {committees.slice(7, 10).map((committee, index) => 
+              renderCommitteeCard(committee, index + 7)
+            )}
+          </div>
+
+          {/* Row 5: Hospitality, Philanthropy, Creative (3 committees) */}
+          <div className="flex justify-center space-x-8 sm:space-x-12 lg:space-x-16 mb-16 sm:mb-20 lg:mb-24">
+            {committees.slice(10, 13).map((committee, index) => 
+              renderCommitteeCard(committee, index + 10)
+            )}
+          </div>
+
+          {/* Row 6: Sponsorship, Freshman Reps (2 committees) */}
+          <div className="flex justify-center space-x-8 sm:space-x-12 lg:space-x-16 mb-16 sm:mb-20 lg:mb-24">
+            {committees.slice(13, 15).map((committee, index) => 
+              renderCommitteeCard(committee, index + 13)
+            )}
           </div>
         </div>
-      </div>
 
-      {/* Back to History Button */}
-      <div className="bg-gradient-to-r from-beach-500 to-seafoam-500 py-12 sm:py-16 px-4 sm:px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-beach text-white mb-4 sm:mb-6">
-            Back to History
-          </h2>
-          <p className="text-lg sm:text-xl text-beach-100 mb-6 sm:mb-8 font-ocean px-4">
-            Return to explore our complete timeline and journey
-          </p>
-          <Button
-            as={RouterLink}
-            to="/history"
-            size="lg"
-            className="bg-white text-beach-700 px-6 sm:px-8 py-3 rounded-full font-ocean font-semibold hover:bg-sand-100 transition-all duration-300"
-          >
-            ← Back to History Timeline
-          </Button>
+        {/* Call to Action */}
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <Card className="bg-white/90 backdrop-blur-md border border-sand-200 shadow-2xl">
+            <CardBody className="p-8 sm:p-10 lg:p-12">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-beach text-beach-700 mb-6">
+                🌊 Get Involved with NJ NAACH
+              </h2>
+              <p className="text-lg sm:text-xl text-seafoam-600 font-ocean mb-8 leading-relaxed">
+                Interested in joining our team or learning more about our committees? 
+                Reach out to any committee member or contact us directly.
+              </p>
+              <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
+                <Button
+                  as="a"
+                  href="/history"
+                  className="bg-gradient-to-r from-beach-400 to-beach-500 text-white font-ocean font-semibold px-8 sm:px-10 py-4 sm:py-5 hover:from-beach-500 hover:to-beach-600 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
+                >
+                  📚 Back to History
+                </Button>
+                <Button
+                  as="a"
+                  href="mailto:info@njnaach.org"
+                  className="bg-gradient-to-r from-seafoam-400 to-seafoam-500 text-white font-ocean font-semibold px-8 sm:px-10 py-4 sm:py-5 hover:from-seafoam-500 hover:to-seafoam-600 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
+                >
+                  📧 Contact Us
+                </Button>
+              </div>
+            </CardBody>
+          </Card>
         </div>
       </div>
     </PageTemplate>
   );
-}
+};
+
+export default Board2_0;

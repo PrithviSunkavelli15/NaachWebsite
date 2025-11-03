@@ -72,3 +72,27 @@ code {
   background: rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
+
+/* Center avatar text properly */
+[data-slot="avatar"] {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+[data-slot="avatar"] span {
+  line-height: 0.5 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  transform: translateY(-4px) !important;
+  vertical-align: middle !important;
+}
+
+/* Mobile menu overlay - ensure it appears above content */
+[data-slot="menu"] {
+  z-index: 9999 !important;
+  background: white !important;
+}

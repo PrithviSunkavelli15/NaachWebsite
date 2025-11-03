@@ -10,22 +10,26 @@ import {
   NavbarMenu,
   NavbarMenuToggle,
   NavbarMenuItem,
+  Avatar,
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownItem,
 } from '@heroui/react';
+import { useAuth } from '../AuthContext';
 
-// Enhanced SVG logo for NJ Naach with beach theme
+// NaachLogo.png logo for NJ Naach
 export const AcmeLogo = () => (
-  <svg fill="none" height="36" viewBox="0 0 32 32" width="36">
-    <path
-      clipRule="evenodd"
-      d="M17.6482 10.1305L15.8785 7.02583L7.02979 22.5499H10.5278L17.6482 10.1305ZM19.8798 14.0457L18.11 17.1983L19.394 19.4511H16.8453L15.1056 22.5499H24.7272L19.8798 14.0457Z"
-      fill="currentColor"
-      fillRule="evenodd"
-    />
-  </svg>
+  <img 
+    src="/images/NaachLogo.png" 
+    alt="NJ Naach Logo" 
+    className="h-7 w-auto opacity-90 hover:opacity-100 transition-opacity uration-200"
+  />
 );
 
 const PageTemplate = ({ children }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { currentUser, logout, userRole, userData } = useAuth();
 
   const menuItems = [
     { name: "Home", path: "/" },
@@ -33,9 +37,19 @@ const PageTemplate = ({ children }) => {
     { name: "Philanthropy", path: "/philanthropy" },
     { name: "Board", path: "/board" },
     { name: "Judges", path: "/judges" },
+    { name: "Partners", path: "/sponsorship" },
+    { name: "Merch", path: "/merch" },
     { name: "History", path: "/history" },
     { name: "Event Schedule", path: "/schedule" },
   ];
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+    } catch (error) {
+      console.error('Failed to log out:', error);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-beach-50 via-sand-50 to-seafoam-100 flex flex-col">
@@ -45,15 +59,33 @@ const PageTemplate = ({ children }) => {
         shouldHideOnScroll 
         isBordered 
         position="sticky"
-        className="backdrop-blur-md bg-white/80 border-b border-sand-200 shadow-lg min-h-[5rem] sm:min-h-[6rem]"
+        className="backdrop-blur-md bg-white/80 border-b border-sand-200 shadow-lg min-h-[5rem] sm:min-h-[6rem] z-50"
         onMenuOpenChange={setIsMenuOpen}
+        isMenuOpen={isMenuOpen}
       >
         <NavbarContent>
-          <NavbarMenuToggle
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="sm:hidden p-2 text-beach-700"
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-            className="sm:hidden"
-          />
-          <NavbarBrand>
+          >
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              {isMenuOpen ? (
+                <path d="M6 18L18 6M6 6l12 12" />
+              ) : (
+                <path d="M4 6h16M4 12h16M4 18h16" />
+              )}
+            </svg>
+          </button>
+          <NavbarBrand as={RouterLink} to="/" className="cursor-pointer">
             <AcmeLogo />
             <span className="font-beach font-bold text-beach-700 ml-2 text-lg sm:text-xl">
               NJ NAACH
@@ -88,20 +120,67 @@ const PageTemplate = ({ children }) => {
               Buy Tickets
             </Button>
           </NavbarItem>
-          <NavbarItem>
-            <Button
-              as={RouterLink}
-              to="/login"
-              size="sm"
-              className="bg-gradient-to-r from-beach-400 to-beach-500 text-white px-4 lg:px-6 py-3 rounded-full hover:from-beach-500 hover:to-beach-600 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 font-ocean font-semibold text-xs lg:text-sm"
-            >
-              Log In
-            </Button>
-          </NavbarItem>
+          
+          {currentUser ? (
+            <>
+              <NavbarItem>
+                <Dropdown>
+                  <DropdownTrigger>
+                    <Avatar 
+                      name={(userData?.username || userData?.teamName || 'U').charAt(0).toUpperCase()} 
+                      className="bg-gradient-to-r from-beach-400 to-seafoam-400 cursor-pointer"
+                      size="sm"
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                      }}
+                      classNames={{
+                        base: "flex items-center justify-center",
+                        name: "flex items-center justify-center !leading-none"
+                      }}
+                    />
+                  </DropdownTrigger>
+                  <DropdownMenu aria-label="User menu">
+                    <DropdownItem 
+                      key="dashboard"
+                      as={RouterLink}
+                      to="/portal"
+                    >
+                      Dashboard
+                    </DropdownItem>
+                    {userRole === 'admin' && (
+                      <DropdownItem 
+                        key="admin"
+                        as={RouterLink}
+                        to="/admin"
+                      >
+                        Admin Panel
+                      </DropdownItem>
+                    )}
+                    <DropdownItem key="logout" color="danger" onClick={handleLogout}>
+                      Logout
+                    </DropdownItem>
+                  </DropdownMenu>
+                </Dropdown>
+              </NavbarItem>
+            </>
+          ) : (
+            <NavbarItem>
+              <Button
+                as={RouterLink}
+                to="/login"
+                size="sm"
+                className="bg-gradient-to-r from-beach-400 to-beach-500 text-white px-4 lg:px-6 py-3 rounded-full hover:from-beach-500 hover:to-beach-600 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 font-ocean font-semibold text-xs lg:text-sm"
+              >
+                Log In
+              </Button>
+            </NavbarItem>
+          )}
         </NavbarContent>
 
         {/* Mobile Menu */}
-        <NavbarMenu className="pt-8 bg-white/95 backdrop-blur-md">
+        <NavbarMenu className="pt-8 bg-white shadow-xl fixed top-[5rem] left-0 right-0 bottom-0 z-40 overflow-y-auto">
           <div className="flex flex-col gap-4">
             {menuItems.map((item) => (
               <NavbarMenuItem key={item.name}>
@@ -126,14 +205,37 @@ const PageTemplate = ({ children }) => {
               >
                 Buy Tickets
               </Button>
-              <Button
-                as={RouterLink}
-                to="/login"
-                className="w-full bg-gradient-to-r from-beach-400 to-beach-500 text-white py-3 rounded-lg hover:from-beach-500 hover:to-beach-600 transition-all duration-200 font-ocean font-semibold"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Log In
-              </Button>
+              
+              {currentUser ? (
+                <>
+                  <Link
+                    as={RouterLink}
+                    to="/portal"
+                    className="w-full text-beach-700 hover:text-beach-500 transition-colors duration-200 font-ocean font-medium text-lg py-3 px-4 rounded-lg hover:bg-beach-50 text-center"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {userData?.username || userData?.teamName || 'Dashboard'}
+                  </Link>
+                  <Button
+                    onClick={() => {
+                      handleLogout();
+                      setIsMenuOpen(false);
+                    }}
+                    className="w-full bg-gradient-to-r from-coral-400 to-coral-500 text-white py-3 rounded-lg hover:from-coral-500 hover:to-coral-600 transition-all duration-200 font-ocean font-semibold"
+                  >
+                    Logout
+                  </Button>
+                </>
+              ) : (
+                <Button
+                  as={RouterLink}
+                  to="/login"
+                  className="w-full bg-gradient-to-r from-beach-400 to-beach-500 text-white py-3 rounded-lg hover:from-beach-500 hover:to-beach-600 transition-all duration-200 font-ocean font-semibold"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Log In
+                </Button>
+              )}
             </div>
           </div>
         </NavbarMenu>
