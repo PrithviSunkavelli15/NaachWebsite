@@ -291,41 +291,50 @@ export default function AdminPanel() {
             </CardHeader>
             <CardBody>
               <div className="space-y-4">
-                <Input
-                  label="Username"
-                  placeholder="rutgers, princeton, etc."
-                  value={editingUser ? editingUser.username : newUser.username}
-                  onChange={(e) => 
-                    editingUser 
-                      ? setEditingUser({...editingUser, username: e.target.value})
-                      : setNewUser({...newUser, username: e.target.value})
-                  }
-                  className="font-ocean"
-                  type="text"
-                />
+                <div className="space-y-2">
+                  <label className="text-sm font-ocean text-beach-700 font-semibold">Username</label>
+                  <Input
+                    placeholder="rutgers, princeton, etc."
+                    value={editingUser ? editingUser.username : newUser.username}
+                    onChange={(e) => 
+                      editingUser 
+                        ? setEditingUser({...editingUser, username: e.target.value})
+                        : setNewUser({...newUser, username: e.target.value})
+                    }
+                    className="font-ocean"
+                    variant="bordered"
+                    type="text"
+                  />
+                </div>
                 
                 {!editingUser && (
-                  <Input
-                    label="Password"
-                    placeholder="Enter password"
-                    value={newUser.password}
-                    onChange={(e) => setNewUser({...newUser, password: e.target.value})}
-                    className="font-ocean"
-                    type="password"
-                  />
+                  <div className="space-y-2">
+                    <label className="text-sm font-ocean text-beach-700 font-semibold">Password</label>
+                    <Input
+                      placeholder="Enter password"
+                      value={newUser.password}
+                      onChange={(e) => setNewUser({...newUser, password: e.target.value})}
+                      className="font-ocean"
+                      variant="bordered"
+                      type="password"
+                    />
+                  </div>
                 )}
                 
-                <Input
-                  label="Team Name"
-                  placeholder="Team Name (e.g., Rutgers, Princeton)"
-                  value={editingUser ? editingUser.teamName : newUser.teamName}
-                  onChange={(e) => 
-                    editingUser 
-                      ? setEditingUser({...editingUser, teamName: e.target.value})
-                      : setNewUser({...newUser, teamName: e.target.value})
-                  }
-                  className="font-ocean"
-                />
+                <div className="space-y-2">
+                  <label className="text-sm font-ocean text-beach-700 font-semibold">Team Name</label>
+                  <Input
+                    placeholder="Team Name (e.g., Rutgers, Princeton)"
+                    value={editingUser ? editingUser.teamName : newUser.teamName}
+                    onChange={(e) => 
+                      editingUser 
+                        ? setEditingUser({...editingUser, teamName: e.target.value})
+                        : setNewUser({...newUser, teamName: e.target.value})
+                    }
+                    className="font-ocean"
+                    variant="bordered"
+                  />
+                </div>
                 
                 <div>
                   <label className="text-sm font-ocean text-beach-700 mb-2 block">Role</label>
