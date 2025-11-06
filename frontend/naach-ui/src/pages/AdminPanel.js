@@ -27,7 +27,7 @@ import {
   deleteDoc, 
   doc
 } from 'firebase/firestore';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { auth, db } from '../firebase/config';
 import { useAuth } from '../AuthContext';
 import PageTemplate from '../components/PageTemplate';
@@ -80,6 +80,15 @@ export default function AdminPanel() {
         return;
       }
 
+      // Save current admin credentials to sign back in
+      const adminEmail = currentUser.email;
+      const adminPassword = prompt('Please enter your admin password to confirm:');
+      
+      if (!adminPassword) {
+        alert('Admin password is required to create new users');
+        return;
+      }
+
       // Create unique email from username for Firebase Authentication
       const timestamp = Date.now();
       const email = `${newUser.username.toLowerCase()}-${timestamp}@njnaach.com`;
@@ -107,6 +116,11 @@ export default function AdminPanel() {
       });
 
       console.log('User added to Firestore');
+      
+      // Sign back in as admin immediately
+      await signInWithEmailAndPassword(auth, adminEmail, adminPassword);
+      console.log('Signed back in as admin');
+      
       alert('User created successfully!');
       setNewUser({ username: '', password: '', teamName: '', role: 'liaison' });
       setShowAddForm(false);
@@ -124,6 +138,9 @@ export default function AdminPanel() {
           break;
         case 'auth/invalid-email':
           errorMessage += 'Invalid email format.';
+          break;
+        case 'auth/wrong-password':
+          errorMessage += 'Incorrect admin password.';
           break;
         default:
           errorMessage += error.message;
