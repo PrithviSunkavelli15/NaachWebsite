@@ -1,6 +1,6 @@
 import React from "react";
 import { Link as RouterLink } from "react-router-dom";
-import { Button, Card, CardBody, CardHeader } from "@heroui/react";
+import { Button, Card, CardBody } from "@heroui/react";
 import PageTemplate from "../components/PageTemplate";
 
 export default function Teams() {

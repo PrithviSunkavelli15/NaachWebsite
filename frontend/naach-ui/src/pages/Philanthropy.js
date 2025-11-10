@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardBody, Button } from "@heroui/react";
+import { Card, CardBody } from "@heroui/react";
 import PageTemplate from "../components/PageTemplate";
 
 const Philanthropy = () => {

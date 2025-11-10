@@ -1,15 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
 import {
   Card,
   CardBody,
   CardHeader,
   Button,
-  Avatar,
-  Dropdown,
-  DropdownTrigger,
-  DropdownMenu,
-  DropdownItem,
   Input,
   Chip,
   Modal,
@@ -28,8 +22,7 @@ import {
   addDoc, 
   updateDoc, 
   deleteDoc, 
-  doc,
-  getDocs 
+  doc
 } from 'firebase/firestore';
 import { db } from '../firebase/config';
 import { useAuth } from '../AuthContext';
@@ -37,7 +30,7 @@ import PageTemplate from '../components/PageTemplate';
 import DocumentSharing from '../components/DocumentSharing';
 
 export default function TeamPortal() {
-  const { currentUser, logout, userRole, userData } = useAuth();
+  const { currentUser, userRole, userData } = useAuth();
   const [documents, setDocuments] = useState([]);
   const [sharedDocuments, setSharedDocuments] = useState([]);
   const [filteredDocs, setFilteredDocs] = useState([]);
@@ -180,14 +173,6 @@ export default function TeamPortal() {
     console.log('Filtered docs:', allDocs);
     setFilteredDocs(allDocs);
   }, [documents, sharedDocuments, selectedCategory, searchTerm]);
-
-  const handleLogout = async () => {
-    try {
-      await logout();
-    } catch (error) {
-      console.error('Failed to log out:', error);
-    }
-  };
 
   const handleCreateDocument = async () => {
     try {
