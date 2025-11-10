@@ -6,8 +6,8 @@ import AdminPanel from './pages/AdminPanel';
 import { AuthContext, AuthProvider } from './AuthContext';
 import Home from './pages/Home';
 import Board from './pages/Board';
-import Board2_0 from './pages/Board2_0';
-import Board1_0 from './pages/Board1_0';
+import Board2 from './pages/Board2_0';
+import Board1 from './pages/Board1_0';
 import Teams from './pages/Teams';
 import History from './pages/History';
 import Philanthropy from './pages/Philanthropy';
@@ -30,8 +30,8 @@ export default function App() {
           {/* Public pages */}
           <Route path="/" element={<Home />} />
           <Route path="/board" element={<Board />} />
-          <Route path="/board-2-0" element={<Board2_0 />} />
-          <Route path="/board-1-0" element={<Board1_0 />} />
+          <Route path="/board-2-0" element={<Board2 />} />
+          <Route path="/board-1-0" element={<Board1 />} />
           <Route path="/teams" element={<Teams />} />
           <Route path="/history" element={<History />} />
           <Route path="/philanthropy" element={<Philanthropy />} />

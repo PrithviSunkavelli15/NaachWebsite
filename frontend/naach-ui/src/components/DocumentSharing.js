@@ -43,14 +43,6 @@ export default function DocumentSharing({ currentUser, userRole }) {
   const [selectedDocument, setSelectedDocument] = useState(null);
   const fileInputRef = useRef(null);
 
-  const documentTypes = [
-    { key: 'general', label: 'General', color: 'primary' },
-    { key: 'schedule', label: 'Schedule', color: 'secondary' },
-    { key: 'rules', label: 'Rules', color: 'warning' },
-    { key: 'announcement', label: 'Announcement', color: 'success' },
-    { key: 'forms', label: 'Forms', color: 'danger' }
-  ];
-
   // Fetch teams from Firestore
   useEffect(() => {
     const fetchTeams = async () => {
