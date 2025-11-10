@@ -88,27 +88,6 @@ export default function Merch() {
             ))}
           </div>
 
-          {/* Bundle Deal */}
-          <div className="max-w-2xl mx-auto mb-12">
-            <Card className="bg-gradient-to-br from-coral-100 to-beach-100 border-2 border-coral-300 shadow-2xl">
-              <CardBody className="p-8 text-center">
-                <div className="text-5xl mb-4">🎉</div>
-                <h3 className="text-2xl sm:text-3xl font-beach text-beach-700 mb-3">
-                  Special Bundle Deal!
-                </h3>
-                <p className="text-lg sm:text-xl text-beach-600 font-ocean mb-2">
-                  Crewneck + Sweatpants Bundle
-                </p>
-                <p className="text-4xl font-bold text-coral-600 mb-2">
-                  $32
-                </p>
-                <p className="text-sm text-beach-600 font-ocean">
-                  Save $3 when you bundle!
-                </p>
-              </CardBody>
-            </Card>
-          </div>
-
           {/* Order Button */}
           <div className="text-center">
             <Button
